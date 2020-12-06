@@ -1,21 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-    <title>Nick Coffey</title>
-    <script src="scripts/scripts.js"></script>
-    <link rel="stylesheet" href="css/styles.min.css" />
-  </head>
 
-  <body>
-    <section id="parallax1" class="parallax-base">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+  <title>Nick Coffey</title>
+  <script src="scripts/scripts.js"></script>
+  <link rel="stylesheet" href="css/styles.min.css" />
+</head>
+
+<body>
+  <section id="parallax1" class="parallax-base">
+    <div id="header-container">
       <header>
         <div class="brand">
           <h1 class="logo">NJC</h1>
           <h1 class="title">Nick Coffey</h1>
+        </div>
+        <div id="menu-icon">
+          <div></div>
+          <div></div>
+          <div></div>
         </div>
         <nav>
           <a onclick="scrollToContent('about')">About</a>
@@ -23,53 +30,54 @@
           <a onclick="scrollToContent('projects')">Projects</a>
           <a onclick="scrollToContent('social')">Social</a>
         </nav>
-        <!-- TODO: add burger menu for mobile -->
       </header>
-      <div class="jumbotron">
-        <h1 class="description">Hello, I'm</h1>
-        <h1 class="name">Nick Coffey</h1>
-      </div>
-    </section>
+    </div>
+    <div class="jumbotron">
+      <h1 class="description">Hello, I'm</h1>
+      <h1 class="name">Nick Coffey</h1>
+    </div>
+  </section>
 
-    <section id="about" class="content">
-      <header>
-        <div class="spacer"></div>
-        <h1>About Me</h1>
-        <div class="spacer"></div>
-      </header>
-    </section>
+  <section id="about" class="content">
+    <header>
+      <div class="spacer"></div>
+      <h1>About Me</h1>
+      <div class="spacer"></div>
+    </header>
+  </section>
 
-    <div id="parallax2" class="parallax-base"></div>
+  <div id="parallax2" class="parallax-base"></div>
 
-    <section id="career" class="content">
-      <header>
-        <div class="spacer"></div>
-        <h1>My Career</h1>
-        <div class="spacer"></div>
-      </header>
-    </section>
+  <section id="career" class="content">
+    <header>
+      <div class="spacer"></div>
+      <h1>My Career</h1>
+      <div class="spacer"></div>
+    </header>
+  </section>
 
-    <div id="parallax3" class="parallax-base"></div>
+  <div id="parallax3" class="parallax-base"></div>
 
-    <section id="projects" class="content">
-      <header>
-        <div class="spacer"></div>
-        <h1>Personal Projects</h1>
-        <div class="spacer"></div>
-      </header>
-    </section>
+  <section id="projects" class="content">
+    <header>
+      <div class="spacer"></div>
+      <h1>Personal Projects</h1>
+      <div class="spacer"></div>
+    </header>
+  </section>
 
-    <div id="parallax4" class="parallax-base"></div>
+  <div id="parallax4" class="parallax-base"></div>
 
-    <section id="social" class="content">
-      <header>
-        <div class="spacer"></div>
-        <h1>Contact Me</h1>
-        <div class="spacer"></div>
-      </header>
-    </section>
+  <section id="social" class="content">
+    <header>
+      <div class="spacer"></div>
+      <h1>Contact Me</h1>
+      <div class="spacer"></div>
+    </header>
+  </section>
 
-    <div id="parallax5" class="parallax-base"></div>
-    <button id="scroll-home" onclick="scrollToTop()">^</button>
-  </body>
+  <div id="parallax5" class="parallax-base"></div>
+  <button id="scroll-home" onclick="scrollToTop()">^</button>
+</body>
+
 </html>

@@ -1,9 +1,13 @@
+function scrollToElement(element: HTMLElement) {
+  element.scrollIntoView({ behavior: "smooth" });
+}
+
 function scrollToContent(id: string) {
-  document.getElementById(id).scrollIntoView({ behavior: "smooth" });
+  scrollToElement(document.getElementById(id));
 }
 
 function scrollToTop() {
-  document.body.scrollIntoView({ behavior: "smooth" });
+  scrollToElement(document.body);
 }
 
 window.onscroll = () => {

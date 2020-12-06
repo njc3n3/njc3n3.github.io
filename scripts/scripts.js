@@ -1,8 +1,11 @@
+function scrollToElement(element) {
+    element.scrollIntoView({ behavior: "smooth" });
+}
 function scrollToContent(id) {
-    document.getElementById(id).scrollIntoView({ behavior: "smooth" });
+    scrollToElement(document.getElementById(id));
 }
 function scrollToTop() {
-    document.body.scrollIntoView({ behavior: "smooth" });
+    scrollToElement(document.body);
 }
 window.onscroll = function () {
     var topOffset = 20;

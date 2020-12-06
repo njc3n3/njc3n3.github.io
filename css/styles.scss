@@ -9,6 +9,13 @@ $dark-text: black;
   transition: 0.18s ease-in-out;
 }
 
+%overlay-base {
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+}
+
 @mixin test-border($color) {
   border: 1px solid $color;
 }
@@ -29,6 +36,11 @@ body {
   padding: 4px;
 }
 
+@mixin large-text-mixin($size) {
+  font-weight: 100;
+  font-size: $size;
+}
+
 // TODO: use editing software to grayscale images
 .parallax-base {
   background-repeat: no-repeat;
@@ -39,49 +51,67 @@ body {
 }
 
 @mixin parallax-mixin($picture, $height) {
-  background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.25)),
-    url($picture);
+  background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.25)), url($picture);
   height: $height;
 }
 
 #parallax1 {
   @include parallax-mixin("../pics/cover.jpg", 100vh);
-  display: flex;
-  flex-direction: column;
   color: $light-text;
-  header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: $base-space;
-
-    .brand {
+  #header-container {
+    @extend %overlay-base;
+    position: absolute;
+    header {
       display: flex;
       align-items: center;
-      .logo {
-        @include box-mixin($primary-color);
-        margin: 0px $base-space / 2 0px 0px;
+      justify-content: space-between;
+      padding: $base-space;
+      @extend %transition-base;
+      .brand {
+        display: flex;
+        align-items: center;
+        .logo {
+          @include box-mixin($primary-color);
+          margin: 0px $base-space / 2 0px 0px;
+        }
+        .title {
+          @include large-text-mixin(3rem);
+        }
       }
-      .title {
-        font-weight: 100;
-        font-size: 3rem;
-      }
-    }
-    nav {
-      a {
-        text-transform: uppercase;
-        text-decoration: none;
-        color: inherit;
-        margin-right: $base-space;
-        font-weight: bold;
+      #menu-icon {
+        display: none;
+        flex-direction: column;
+        height: $base-space;
+        width: $base-space;
         cursor: pointer;
-        @extend %transition-base;
+        div {
+          background-color: $light-text;
+          width: 100%;
+          height: 2px;
+          margin-bottom: 4px;
+        }
+        &:hover {
+          div {
+            background-color: $primary-color;
+          }
+        }
       }
-      a:hover {
-        color: $primary-color;
-      }
-      a:last-child {
-        margin-right: 0px;
+      nav {
+        a {
+          text-transform: uppercase;
+          text-decoration: none;
+          color: inherit;
+          margin-right: $base-space;
+          font-weight: bold;
+          cursor: pointer;
+          @extend %transition-base;
+        }
+        a:hover {
+          color: $primary-color;
+        }
+        a:last-child {
+          margin-right: 0px;
+        }
       }
     }
   }
@@ -89,18 +119,16 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100%;
-    margin-top: $base-space * 8;
+    justify-content: center;
+    @extend %overlay-base;
     text-align: center;
     .description {
       margin-bottom: $base-space;
-      font-weight: 100;
-      font-size: 3rem;
+      @include large-text-mixin(3rem);
       opacity: 0.5;
     }
     .name {
-      font-weight: 100;
-      font-size: 7.5rem;
+      @include large-text-mixin(7.5rem);
     }
   }
 }
@@ -111,7 +139,7 @@ body {
 }
 
 .content {
-  margin: $base-space * 2 $base-space * 4;
+  padding: $base-space * 2 $base-space * 4;
   header {
     display: flex;
     margin-bottom: $base-space;
@@ -119,7 +147,7 @@ body {
       flex: 1;
     }
     h1 {
-      font-size: 3rem;
+      @include large-text-mixin(3rem);
       @include box-mixin($primary-color);
     }
   }
@@ -127,13 +155,14 @@ body {
 
 button#scroll-home {
   position: fixed;
-  bottom: $base-space * 2;
-  right: $base-space * 1;
+  bottom: $base-space;
+  right: $base-space;
   padding-top: 8px;
   width: 48px;
   height: 48px;
   border: none;
-  font-size: 2rem;
+  @include large-text-mixin(2rem);
+  cursor: pointer;
   background-color: $primary-color;
   border-radius: 24px;
   opacity: 0;
@@ -143,42 +172,46 @@ button#scroll-home {
   }
 }
 
-@mixin media-mixin() {
+/* Phones */
+@media only screen and (max-width: 1200px) {
   // Turn off parallax scrolling
   .parallax-base {
     background-attachment: scroll;
   }
-}
-
-/* Tablets & small laptops */
-@media only screen and (max-width: 1200px) {
-  @include media-mixin();
-  .parallax1 {
-    .jumbotron {
-      margin-top: $base-space * 3;
-    }
-  }
-}
-
-/* Phones */
-@media only screen and (max-width: 768px) {
-  @include media-mixin();
-  .parallax1 {
-    header {
-      nav {
-        display: none;
-      }
-      .brand {
-        .logo {
-          margin: 0px;
+  #parallax1 {
+    #header-container {
+      header {
+        .brand {
+          .logo {
+            margin: 0px;
+          }
+          .title {
+            display: none;
+          }
         }
-        .title {
+        nav {
           display: none;
         }
+        #menu-icon {
+          display: flex;
+        }
       }
     }
     .jumbotron {
-      margin-top: $base-space * 2;
+      .description {
+        @include large-text-mixin(2rem);
+      }
+      .name {
+        @include large-text-mixin(4rem);
+      }
+    }
+  }
+  .content {
+    padding: $base-space;
+    header {
+      h1 {
+        @include large-text-mixin(2rem);
+      }
     }
   }
 }
