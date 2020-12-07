@@ -1,11 +1,39 @@
 function scrollToElement(element) {
     element.scrollIntoView({ behavior: "smooth" });
 }
-function scrollToContent(id) {
+function scrollToContent(id, isMobile) {
+    if (isMobile === void 0) { isMobile = false; }
     scrollToElement(document.getElementById(id));
+    if (isMobile) {
+        toggleMobileMenu();
+    }
 }
 function scrollToTop() {
     scrollToElement(document.body);
+}
+function changeClassList(id, className, add) {
+    if (add === void 0) { add = true; }
+    if (add) {
+        document.getElementById(id).classList.add(className);
+    }
+    else {
+        document.getElementById(id).classList.remove(className);
+    }
+}
+var showMenu = false;
+function toggleMobileMenu() {
+    showMenu = !showMenu;
+    var className = 'mobile-menu-open';
+    // const menuIconId = 'menu-icon'
+    var menuId = 'mobile-nav';
+    if (showMenu) {
+        // changeClassList(menuIconId, className)
+        changeClassList(menuId, className);
+    }
+    else {
+        // changeClassList(menuIconId, className, false)
+        changeClassList(menuId, className, false);
+    }
 }
 window.onscroll = function () {
     var topOffset = 20;

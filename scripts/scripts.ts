@@ -2,12 +2,39 @@ function scrollToElement(element: HTMLElement) {
   element.scrollIntoView({ behavior: "smooth" });
 }
 
-function scrollToContent(id: string) {
+function scrollToContent(id: string, isMobile = false) {
   scrollToElement(document.getElementById(id));
+  if (isMobile) {
+    toggleMobileMenu()
+  }
 }
 
 function scrollToTop() {
   scrollToElement(document.body);
+}
+
+function changeClassList(id: string, className: string, add = true) {
+  if (add) {
+    document.getElementById(id).classList.add(className)
+  } else {
+    document.getElementById(id).classList.remove(className)
+  }
+
+}
+
+let showMenu = false
+function toggleMobileMenu() {
+  showMenu = !showMenu
+  const className = 'mobile-menu-open'
+  // const menuIconId = 'menu-icon'
+  const menuId = 'mobile-nav'
+  if (showMenu) {
+    // changeClassList(menuIconId, className)
+    changeClassList(menuId, className)
+  } else {
+    // changeClassList(menuIconId, className, false)
+    changeClassList(menuId, className, false)
+  }
 }
 
 window.onscroll = () => {

@@ -19,17 +19,17 @@
           <h1 class="logo">NJC</h1>
           <h1 class="title">Nick Coffey</h1>
         </div>
-        <div id="menu-icon">
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
         <nav>
           <a onclick="scrollToContent('about')">About</a>
           <a onclick="scrollToContent('career')">Career</a>
           <a onclick="scrollToContent('projects')">Projects</a>
           <a onclick="scrollToContent('social')">Social</a>
         </nav>
+        <div id="menu-icon" onclick="toggleMobileMenu()">
+          <div></div>
+          <div id="middle-bar"></div>
+          <div></div>
+        </div>
       </header>
     </div>
     <div class="jumbotron">
@@ -78,6 +78,16 @@
 
   <div id="parallax5" class="parallax-base"></div>
   <button id="scroll-home" onclick="scrollToTop()">^</button>
+
+  <div id="mobile-nav">
+    <nav>
+      <a onclick="scrollToContent('about', true)">About</a>
+      <a onclick="scrollToContent('career', true)">Career</a>
+      <a onclick="scrollToContent('projects', true)">Projects</a>
+      <a onclick="scrollToContent('social', true)">Social</a>
+    </nav>
+    <div id="mobile-nav-spacer" onclick="toggleMobileMenu()"></div>
+    </nav>
 </body>
 
 </html>

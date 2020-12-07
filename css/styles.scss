@@ -16,6 +16,21 @@ $dark-text: black;
   width: 100%;
 }
 
+%nav-link-base {
+  a {
+    text-transform: uppercase;
+    text-decoration: none;
+    color: inherit;
+    margin-right: $base-space;
+    font-weight: bold;
+    cursor: pointer;
+    @extend %transition-base;
+  }
+  a:hover {
+    color: $primary-color;
+  }
+}
+
 @mixin test-border($color) {
   border: 1px solid $color;
 }
@@ -79,8 +94,10 @@ body {
         }
       }
       #menu-icon {
+        @extend %transition-base;
         display: none;
         flex-direction: column;
+        justify-content: center;
         height: $base-space;
         width: $base-space;
         cursor: pointer;
@@ -88,8 +105,13 @@ body {
           background-color: $light-text;
           width: 100%;
           height: 2px;
-          margin-bottom: 4px;
         }
+        #middle-bar {
+          margin: 4px 0px;
+        }
+        // &.mobile-menu-open {
+        //   transform: rotate(90deg);
+        // }
         &:hover {
           div {
             background-color: $primary-color;
@@ -97,18 +119,7 @@ body {
         }
       }
       nav {
-        a {
-          text-transform: uppercase;
-          text-decoration: none;
-          color: inherit;
-          margin-right: $base-space;
-          font-weight: bold;
-          cursor: pointer;
-          @extend %transition-base;
-        }
-        a:hover {
-          color: $primary-color;
-        }
+        @extend %nav-link-base;
         a:last-child {
           margin-right: 0px;
         }
@@ -150,6 +161,38 @@ body {
       @include large-text-mixin(3rem);
       @include box-mixin($primary-color);
     }
+  }
+}
+
+#mobile-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  visibility: hidden;
+  opacity: 0;
+  @extend %transition-base;
+  nav {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding-top: $base-space * 2;
+    padding-left: $base-space;
+    color: $light-text;
+    background-color: rgba(0, 0, 0, 0.95);
+    @extend %nav-link-base;
+    a {
+      margin-bottom: $base-space;
+    }
+  }
+  #mobile-nav-spacer {
+    flex: 1;
+  }
+  &.mobile-menu-open {
+    visibility: visible;
+    opacity: 1;
   }
 }
 
