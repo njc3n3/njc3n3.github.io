@@ -1,40 +1,26 @@
-$font-stack: Arial, Helvetica, sans-serif;
-$base-space: 24px;
-$primary-color: #71c771;
-$background-color: white;
-$light-text: white;
-$dark-text: black;
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
 
+// VARIABLES
+$font-stack: "Open Sans", sans-serif;
+$base-space: 24px;
+$primary-color: #909e9b;
+$background-color: #cce3de;
+$surface-color: #f6fff8;
+$light-text: white;
+$dark-text: #302f2f;
+$dark-subtitle-text: #302f2f83;
+
+// INTERFACES
 %transition-base {
   transition: 0.18s ease-in-out;
 }
 
-%overlay-base {
-  top: 0px;
-  left: 0px;
-  height: 100%;
-  width: 100%;
-}
-
-%nav-link-base {
-  a {
-    text-transform: uppercase;
-    text-decoration: none;
-    color: inherit;
-    margin-right: $base-space;
-    font-weight: bold;
-    cursor: pointer;
-    @extend %transition-base;
-  }
-  a:hover {
-    color: $primary-color;
-  }
-}
-
+// MIXINS
 @mixin test-border($color) {
   border: 1px solid $color;
 }
 
+// STYLES
 * {
   box-sizing: border-box;
   font-family: $font-stack;
@@ -46,203 +32,89 @@ body {
   color: $dark-text;
 }
 
-@mixin box-mixin($color) {
-  border: 4px solid $color;
-  padding: 4px;
-}
-
-@mixin large-text-mixin($size) {
-  font-weight: 100;
-  font-size: $size;
-}
-
-.parallax-base {
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-@mixin parallax-mixin($picture, $height) {
-  background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.25)),
-    url($picture);
-  height: $height;
-}
-
-#parallax1 {
-  @include parallax-mixin("../pics/cover.webp", 100vh);
-  color: $light-text;
-  #header-container {
-    @extend %overlay-base;
-    position: absolute;
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: $base-space;
-      @extend %transition-base;
-      .brand {
-        display: flex;
-        align-items: center;
-        .logo {
-          @include box-mixin($primary-color);
-          margin: 0px $base-space / 2 0px 0px;
-        }
-        .title {
-          @include large-text-mixin(3rem);
-        }
-      }
-      #menu-icon {
-        @extend %transition-base;
-        display: none;
-        flex-direction: column;
-        justify-content: center;
-        font-size: 1.5rem;
-        cursor: pointer;
-        &:hover {
-          color: $primary-color;
-        }
-      }
-      nav {
-        @extend %nav-link-base;
-        a:last-child {
-          margin-right: 0px;
-        }
-      }
-    }
-  }
-  .jumbotron {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    @extend %overlay-base;
-    text-align: center;
-    .description {
-      margin-bottom: $base-space;
-      @include large-text-mixin(3rem);
-      opacity: 0.5;
-    }
-    .name {
-      @include large-text-mixin(7.5rem);
-    }
-  }
-}
-@for $i from 2 through 5 {
-  #parallax#{$i} {
-    @include parallax-mixin("../pics/cover#{$i}.webp", 50vh);
-  }
-}
-
-.content {
-  padding: $base-space * 2 $base-space * 4;
-  header {
-    display: flex;
-    margin-bottom: $base-space;
-    .spacer {
-      flex: 1;
-    }
-    h1 {
-      @include large-text-mixin(3rem);
-      @include box-mixin($primary-color);
-    }
-  }
-}
-
-#mobile-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  visibility: hidden;
-  opacity: 0;
-  @extend %transition-base;
-  nav {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    padding-top: $base-space * 2;
-    padding-left: $base-space;
-    color: $light-text;
-    background-color: rgba(0, 0, 0, 0.95);
-    @extend %nav-link-base;
-    a {
-      margin-bottom: $base-space;
-    }
-  }
-  #mobile-nav-spacer {
-    flex: 1;
-  }
-  &.mobile-menu-open {
-    visibility: visible;
-    opacity: 1;
-  }
-}
-
-button#scroll-home {
-  position: fixed;
-  bottom: $base-space;
-  right: $base-space;
-  padding: 0;
-  width: $base-space * 2;
-  height: $base-space * 2;
-  border: none;
-  @include large-text-mixin(2rem);
-  cursor: pointer;
+div#top-spacer {
   background-color: $primary-color;
-  border-radius: $base-space;
-  opacity: 0;
-  @extend %transition-base;
-  &:hover {
-    transform: scale(1.1);
+  height: 0.5rem;
+}
+
+header#top-header {
+  background-color: $surface-color;
+  display: flex;
+  align-items: center;
+  padding: 1% 0%;
+  img {
+    margin-left: 15%;
+    height: 15rem;
+    border-radius: 50%;
   }
-  &:focus {
-    outline: none;
+  div#top-header-info {
+    margin-left: 2%;
+    font-size: 1.5rem;
+    h3 {
+      color: $dark-subtitle-text;
+    }
+    div#top-header-icons {
+      margin-top: 5%;
+      a {
+        i {
+          @extend %transition-base;
+          color: $dark-subtitle-text;
+          font-size: 2.5rem;
+        }
+        &:hover {
+          i {
+            color: $dark-text;
+          }
+        }
+        margin-right: 5%;
+      }
+      :last-child {
+        margin-right: 0;
+      }
+    }
   }
 }
 
-/* Phones */
-@media only screen and (max-width: 1200px) {
-  // Turn off parallax scrolling
-  .parallax-base {
-    background-attachment: scroll;
-  }
-  #parallax1 {
-    #header-container {
-      header {
-        .brand {
-          .logo {
-            margin: 0px;
-          }
-          .title {
-            display: none;
-          }
-        }
-        nav {
-          display: none;
-        }
-        #menu-icon {
-          display: flex;
-        }
-      }
-    }
-    .jumbotron {
-      .description {
-        @include large-text-mixin(2rem);
-      }
-      .name {
-        @include large-text-mixin(4rem);
-      }
-    }
-  }
-  .content {
-    padding: $base-space;
-    header {
-      h1 {
-        @include large-text-mixin(2rem);
-      }
-    }
-  }
-}
+// /* Phones */
+// @media only screen and (max-width: 1200px) {
+//   // Turn off parallax scrolling
+//   .parallax-base {
+//     background-attachment: scroll;
+//   }
+//   #parallax1 {
+//     #header-container {
+//       header {
+//         .brand {
+//           .logo {
+//             margin: 0px;
+//           }
+//           .title {
+//             display: none;
+//           }
+//         }
+//         nav {
+//           display: none;
+//         }
+//         #menu-icon {
+//           display: flex;
+//         }
+//       }
+//     }
+//     .jumbotron {
+//       .description {
+//         @include large-text-mixin(2rem);
+//       }
+//       .name {
+//         @include large-text-mixin(4rem);
+//       }
+//     }
+//   }
+//   .content {
+//     padding: $base-space;
+//     header {
+//       h1 {
+//         @include large-text-mixin(2rem);
+//       }
+//     }
+//   }
+// }

@@ -1,65 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <title>Nick Coffey</title>
+    <script
+      src="https://kit.fontawesome.com/e750972312.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="scripts/scripts.js"></script>
+    <link rel="stylesheet" href="css/styles.min.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-  <title>Nick Coffey</title>
-  <script src="https://kit.fontawesome.com/e750972312.js" crossorigin="anonymous"></script>
-  <script src="scripts/scripts.js"></script>
-  <link rel="stylesheet" href="css/styles.min.css" />
-</head>
-
-<body>
-  <section id="parallax1" class="parallax-base">
-    <div id="header-container">
-      <header>
-        <div class="brand">
-          <h1 class="logo">NJC</h1>
-          <h1 class="title">Nick Coffey</h1>
+  <body>
+    <div id="top-spacer"></div>
+    <header id="top-header">
+      <img src="../pics/profile.jpg" alt="Profile picture" />
+      <div id="top-header-info">
+        <h1>Nick Coffey</h1>
+        <h3>Frontend Engineer</h3>
+        <div id="top-header-icons">
+          <a href="https://www.linkedin.com/in/nicholasjcoffey"
+            ><i class="fab fa-linkedin"></i
+          ></a>
+          <a href="https://www.github.com/nickcoffey"
+            ><i class="fab fa-github-square"></i
+          ></a>
+          <a href="mailto:nicholasjcoffey@gmail.com"
+            ><i class="fas fa-envelope-square"></i
+          ></a>
         </div>
-        <nav>
-          <a onclick="scrollToContent('about')">About</a>
-          <a onclick="scrollToContent('career')">Career</a>
-          <a onclick="scrollToContent('projects')">Projects</a>
-          <a onclick="scrollToContent('social')">Social</a>
-        </nav>
-        <i id="menu-icon" class="fas fa-bars" onclick="toggleMobileMenu()"></i>
-      </header>
-    </div>
-    <div class="jumbotron">
-      <h1 class="description">Hello, I'm</h1>
-      <h1 class="name">Nick Coffey</h1>
-    </div>
-  </section>
-
-  <my-content content-id="about" content-title="About Me"></my-content>
-  <div id="parallax2" class="parallax-base"></div>
-
-  <my-content content-id="career" content-title="My Career"></my-content>
-  <div id="parallax3" class="parallax-base"></div>
-
-  <my-content content-id="projects" content-title="Personal Projects"></my-content>
-  <div id="parallax4" class="parallax-base"></div>
-
-  <my-content content-id="social" content-title="Contact Me"></my-content>
-  <div id="parallax5" class="parallax-base"></div>
-
-  <button id="scroll-home" aria-label="Scroll Home" onclick="scrollToTop()">
-    <i class="fas fa-arrow-up"></i>
-  </button>
-
-  <div id="mobile-nav">
-    <nav>
-      <a onclick="scrollToContent('about', true)">About</a>
-      <a onclick="scrollToContent('career', true)">Career</a>
-      <a onclick="scrollToContent('projects', true)">Projects</a>
-      <a onclick="scrollToContent('social', true)">Social</a>
-    </nav>
-    <div id="mobile-nav-spacer" onclick="toggleMobileMenu()"></div>
-    </nav>
-</body>
-
+      </div>
+    </header>
+    <main></main>
+    <footer></footer>
+  </body>
 </html>
