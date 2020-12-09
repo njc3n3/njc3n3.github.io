@@ -66,7 +66,8 @@ body {
 }
 
 @mixin parallax-mixin($picture, $height) {
-  background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.25)), url($picture);
+  background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.25)),
+    url($picture);
   height: $height;
 }
 
@@ -98,24 +99,10 @@ body {
         display: none;
         flex-direction: column;
         justify-content: center;
-        height: $base-space;
-        width: $base-space;
+        font-size: 1.5rem;
         cursor: pointer;
-        div {
-          background-color: $light-text;
-          width: 100%;
-          height: 2px;
-        }
-        :nth-child(2) {
-          margin: 4px 0px;
-        }
-        // &.mobile-menu-open {
-        //   transform: rotate(90deg);
-        // }
         &:hover {
-          div {
-            background-color: $primary-color;
-          }
+          color: $primary-color;
         }
       }
       nav {
@@ -201,7 +188,6 @@ button#scroll-home {
   bottom: $base-space;
   right: $base-space;
   padding: 0;
-  padding-top: 8px;
   width: $base-space * 2;
   height: $base-space * 2;
   border: none;

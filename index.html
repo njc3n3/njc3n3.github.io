@@ -7,6 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
   <title>Nick Coffey</title>
+  <script src="https://kit.fontawesome.com/e750972312.js" crossorigin="anonymous"></script>
   <script src="scripts/scripts.js"></script>
   <link rel="stylesheet" href="css/styles.min.css" />
 </head>
@@ -25,11 +26,7 @@
           <a onclick="scrollToContent('projects')">Projects</a>
           <a onclick="scrollToContent('social')">Social</a>
         </nav>
-        <div id="menu-icon" onclick="toggleMobileMenu()">
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
+        <i id="menu-icon" class="fas fa-bars" onclick="toggleMobileMenu()"></i>
       </header>
     </div>
     <div class="jumbotron">
@@ -37,48 +34,17 @@
       <h1 class="name">Nick Coffey</h1>
     </div>
   </section>
-
-  <section id="about" class="content">
-    <header>
-      <div class="spacer"></div>
-      <h1>About Me</h1>
-      <div class="spacer"></div>
-    </header>
-  </section>
-
+  <my-content content-id="about" content-title="About Me"></my-content>
   <div id="parallax2" class="parallax-base"></div>
-
-  <section id="career" class="content">
-    <header>
-      <div class="spacer"></div>
-      <h1>My Career</h1>
-      <div class="spacer"></div>
-    </header>
-  </section>
-
+  <my-content content-id="career" content-title="My Career"></my-content>
   <div id="parallax3" class="parallax-base"></div>
-
-  <section id="projects" class="content">
-    <header>
-      <div class="spacer"></div>
-      <h1>Personal Projects</h1>
-      <div class="spacer"></div>
-    </header>
-  </section>
-
+  <my-content content-id="projects" content-title="Personal Projects"></my-content>
   <div id="parallax4" class="parallax-base"></div>
-
-  <section id="social" class="content">
-    <header>
-      <div class="spacer"></div>
-      <h1>Contact Me</h1>
-      <div class="spacer"></div>
-    </header>
-  </section>
-
+  <my-content content-id="social" content-title="Contact Me"></my-content>
   <div id="parallax5" class="parallax-base"></div>
-  <button id="scroll-home" onclick="scrollToTop()">^</button>
-
+  <button id="scroll-home" onclick="scrollToTop()">
+    <i class="fas fa-arrow-up"></i>
+  </button>
   <div id="mobile-nav">
     <nav>
       <a onclick="scrollToContent('about', true)">About</a>

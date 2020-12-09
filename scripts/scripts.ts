@@ -5,7 +5,7 @@ function scrollToElement(element: HTMLElement) {
 function scrollToContent(id: string, isMobile = false) {
   scrollToElement(document.getElementById(id));
   if (isMobile) {
-    toggleMobileMenu()
+    toggleMobileMenu();
   }
 }
 
@@ -15,25 +15,21 @@ function scrollToTop() {
 
 function changeClassList(id: string, className: string, add = true) {
   if (add) {
-    document.getElementById(id).classList.add(className)
+    document.getElementById(id).classList.add(className);
   } else {
-    document.getElementById(id).classList.remove(className)
+    document.getElementById(id).classList.remove(className);
   }
-
 }
 
-let showMenu = false
+let showMenu = false;
 function toggleMobileMenu() {
-  showMenu = !showMenu
-  const className = 'mobile-menu-open'
-  // const menuIconId = 'menu-icon'
-  const menuId = 'mobile-nav'
+  showMenu = !showMenu;
+  const className = "mobile-menu-open";
+  const menuId = "mobile-nav";
   if (showMenu) {
-    // changeClassList(menuIconId, className)
-    changeClassList(menuId, className)
+    changeClassList(menuId, className);
   } else {
-    // changeClassList(menuIconId, className, false)
-    changeClassList(menuId, className, false)
+    changeClassList(menuId, className, false);
   }
 }
 
@@ -62,3 +58,23 @@ window.onload = () => {
       );
   }
 };
+
+class MyContent extends HTMLElement {
+  constructor() {
+    super();
+  }
+  connectedCallback() {
+    const id = this.getAttribute("content-id");
+    const title = this.getAttribute("content-title");
+    this.innerHTML = `
+      <section id=${id} class="content">
+        <header>
+          <div class="spacer"></div>
+          <h1>${title}</h1>
+          <div class="spacer"></div>
+        </header>
+      </section>
+    `;
+  }
+}
+window.customElements.define("my-content", MyContent);
