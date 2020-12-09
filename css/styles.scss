@@ -9,6 +9,7 @@ $surface-color: #f6fff8;
 $light-text: white;
 $dark-text: #302f2f;
 $dark-subtitle-text: #302f2f83;
+$main-content-spacing: 2rem;
 
 // INTERFACES
 %transition-base {
@@ -41,20 +42,20 @@ header#top-header {
   background-color: $surface-color;
   display: flex;
   align-items: center;
-  padding: 1% 0%;
+  padding: 1rem 0;
   img {
-    margin-left: 15%;
+    margin-left: 15rem;
     height: 15rem;
-    border-radius: 50%;
+    border-radius: 50rem;
   }
   div#top-header-info {
-    margin-left: 2%;
+    margin-left: 2rem;
     font-size: 1.5rem;
     h3 {
       color: $dark-subtitle-text;
     }
     div#top-header-icons {
-      margin-top: 5%;
+      margin-top: 1rem;
       a {
         i {
           @extend %transition-base;
@@ -66,7 +67,7 @@ header#top-header {
             color: $dark-text;
           }
         }
-        margin-right: 5%;
+        margin-right: 1rem;
       }
       :last-child {
         margin-right: 0;
@@ -75,46 +76,23 @@ header#top-header {
   }
 }
 
-// /* Phones */
-// @media only screen and (max-width: 1200px) {
-//   // Turn off parallax scrolling
-//   .parallax-base {
-//     background-attachment: scroll;
-//   }
-//   #parallax1 {
-//     #header-container {
-//       header {
-//         .brand {
-//           .logo {
-//             margin: 0px;
-//           }
-//           .title {
-//             display: none;
-//           }
-//         }
-//         nav {
-//           display: none;
-//         }
-//         #menu-icon {
-//           display: flex;
-//         }
-//       }
-//     }
-//     .jumbotron {
-//       .description {
-//         @include large-text-mixin(2rem);
-//       }
-//       .name {
-//         @include large-text-mixin(4rem);
-//       }
-//     }
-//   }
-//   .content {
-//     padding: $base-space;
-//     header {
-//       h1 {
-//         @include large-text-mixin(2rem);
-//       }
-//     }
-//   }
-// }
+main {
+  padding: $main-content-spacing * 2 20rem;
+  display: flex;
+  div {
+    section {
+      background-color: $surface-color;
+      margin-bottom: $main-content-spacing;
+    }
+    :last-child {
+      margin-bottom: 0;
+    }
+  }
+  div#main-content-left {
+    flex: 2;
+    margin-right: $main-content-spacing;
+  }
+  div#main-content-right {
+    flex: 1;
+  }
+}
