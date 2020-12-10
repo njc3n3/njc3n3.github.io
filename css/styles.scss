@@ -9,7 +9,7 @@ $surface-color: #f6fff8;
 $light-text: white;
 $dark-text: #302f2f;
 $dark-subtitle-text: #302f2f83;
-$main-content-spacing: 2rem;
+$main-content-spacing: 1rem;
 
 // INTERFACES
 %transition-base {
@@ -41,20 +41,20 @@ div#top-spacer {
 header#top-header {
   background-color: $surface-color;
   display: flex;
+  flex-direction: column;
   align-items: center;
   padding: 1rem 0;
   img {
-    margin-left: 15rem;
     height: 15rem;
     border-radius: 50rem;
   }
   div#top-header-info {
-    margin-left: 2rem;
     font-size: 1.5rem;
     h3 {
       color: $dark-subtitle-text;
     }
     div#top-header-icons {
+      text-align: center;
       margin-top: 1rem;
       a {
         i {
@@ -77,22 +77,50 @@ header#top-header {
 }
 
 main {
-  padding: $main-content-spacing * 2 20rem;
+  padding: $main-content-spacing;
   display: flex;
+  flex-direction: column;
   div {
     section {
       background-color: $surface-color;
       margin-bottom: $main-content-spacing;
+      padding: $main-content-spacing;
     }
     :last-child {
       margin-bottom: 0;
     }
   }
-  div#main-content-left {
+  div#main-content-left-top {
     flex: 2;
-    margin-right: $main-content-spacing;
+    margin-bottom: $main-content-spacing;
   }
-  div#main-content-right {
-    flex: 1;
+}
+
+// LARGER SCREENS
+@media only screen and (min-width: 768px) {
+  header#top-header {
+    flex-direction: row;
+    img {
+      margin-left: 10rem;
+    }
+    div#top-header-info {
+      margin-left: 2.5rem;
+      div#top-header-icons {
+        text-align: left;
+        margin-top: 1rem;
+      }
+    }
+  }
+
+  main {
+    flex-direction: row;
+    div#main-content-left-top {
+      flex: 2;
+      margin-right: $main-content-spacing;
+      margin-bottom: 0px;
+    }
+    div#main-content-right-bottom {
+      flex: 1;
+    }
   }
 }
