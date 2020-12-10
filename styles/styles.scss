@@ -22,6 +22,15 @@ $dark-subtitle-text: #302f2fa8;
   width: ($interval/3) * 100%;
 }
 
+@mixin link-mixin($color, $hover-color) {
+  @extend %transition-base;
+  color: $color;
+  text-decoration: none;
+  &:hover {
+    color: $hover-color;
+  }
+}
+
 // STYLES
 * {
   box-sizing: border-box;
@@ -48,31 +57,28 @@ body {
     height: 15rem;
     border-radius: 50rem;
   }
-}
-.top-header-info {
-  margin-top: 1rem;
-  text-align: center;
-}
-.top-header-name {
-  font-size: 3rem;
-}
-.top-header-title {
-  font-size: 1.5rem;
-  color: $dark-subtitle-text;
-}
-.top-header-icons {
-  margin-top: 1rem;
-  a {
-    @extend %transition-base;
-    color: $dark-subtitle-text;
-    font-size: 2.5rem;
-    &:hover {
-      color: $dark-text;
-    }
-    margin-right: 1rem;
+  &-info {
+    margin-top: 1rem;
+    text-align: center;
   }
-  :last-child {
-    margin-right: 0;
+  &-name {
+    font-size: 3rem;
+  }
+  &-title {
+    font-size: 1.5rem;
+    color: $dark-subtitle-text;
+  }
+  &-icons {
+    margin-top: 1rem;
+    a {
+      @include link-mixin($dark-subtitle-text, $dark-text);
+      font-size: 2.5rem;
+      margin-right: 1rem;
+    }
+
+    :last-child {
+      margin-right: 0;
+    }
   }
 }
 
@@ -113,12 +119,7 @@ main {
       margin-right: 0.5rem;
     }
     a {
-      @extend %transition-base;
-      text-decoration: none;
-      color: $dark-subtitle-text;
-    }
-    a:hover {
-      color: $dark-text;
+      @include link-mixin($dark-subtitle-text, $dark-text);
     }
   }
 }
@@ -126,37 +127,37 @@ main {
   .container {
     display: flex;
     flex-direction: column;
-    .progress-container:last-of-type {
-      margin-bottom: 0;
+  }
+}
+.progress {
+  margin-bottom: 1rem;
+  &-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    .skill {
+      font-weight: 600;
     }
-    .progress-container {
-      margin-bottom: 1rem;
-      .info {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        margin-bottom: 0.5rem;
-        .skill {
-          font-weight: 600;
-        }
-        .level {
-          color: $dark-subtitle-text;
-        }
+    .level {
+      color: $dark-subtitle-text;
+    }
+  }
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+  &-bar {
+    background-color: $primary-color;
+    height: 1rem;
+    .progress-amount {
+      height: 100%;
+      background-color: $dark-text;
+      @include progress-bar-mixin(1);
+      &.intermediate {
+        @include progress-bar-mixin(2);
       }
-      .progress-bar {
-        background-color: $primary-color;
-        height: 1rem;
-        .progress-amount {
-          height: 100%;
-          background-color: $dark-text;
-          @include progress-bar-mixin(1);
-          &.intermediate {
-            @include progress-bar-mixin(2);
-          }
-          &.advanced {
-            @include progress-bar-mixin(3);
-          }
-        }
+      &.advanced {
+        @include progress-bar-mixin(3);
       }
     }
   }
@@ -168,15 +169,15 @@ main {
       color: $dark-subtitle-text;
       margin-right: 1rem;
     }
-    .sub-container {
-      display: flex;
-      flex-direction: column;
-      .degree {
-        font-weight: 600;
-      }
-      .school {
-        color: $dark-subtitle-text;
-      }
+  }
+  .school {
+    display: flex;
+    flex-direction: column;
+    &-degree {
+      font-weight: 600;
+    }
+    &-name {
+      color: $dark-subtitle-text;
     }
   }
 }
@@ -190,13 +191,9 @@ footer {
 }
 .footer-icons {
   a {
-    @extend %transition-base;
-    color: $surface-color;
-    font-size: 1.75rem;
-    &:hover {
-      color: $primary-color;
-    }
+    @include link-mixin($surface-color, $primary-color);
     margin-right: 1rem;
+    font-size: 1.75rem;
   }
   :last-child {
     margin-right: 0;
