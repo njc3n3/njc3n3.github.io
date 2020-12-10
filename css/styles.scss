@@ -8,7 +8,7 @@ $background-color: #cce3de;
 $surface-color: #f6fff8;
 $light-text: white;
 $dark-text: #302f2f;
-$dark-subtitle-text: #302f2f83;
+$dark-subtitle-text: #302f2fa8;
 $main-content-spacing: 1rem;
 
 // INTERFACES
@@ -49,23 +49,23 @@ header#top-header {
     border-radius: 50rem;
   }
   div#top-header-info {
-    font-size: 1.5rem;
-    h3 {
+    margin-top: 1rem;
+    text-align: center;
+    #top-header-name {
+      font-size: 3rem;
+    }
+    #top-header-title {
+      font-size: 1.5rem;
       color: $dark-subtitle-text;
     }
     div#top-header-icons {
-      text-align: center;
       margin-top: 1rem;
       a {
-        i {
-          @extend %transition-base;
-          color: $dark-subtitle-text;
-          font-size: 2.5rem;
-        }
+        @extend %transition-base;
+        color: $dark-subtitle-text;
+        font-size: 2.5rem;
         &:hover {
-          i {
-            color: $dark-text;
-          }
+          color: $dark-text;
         }
         margin-right: 1rem;
       }
@@ -85,14 +85,41 @@ main {
       background-color: $surface-color;
       margin-bottom: $main-content-spacing;
       padding: $main-content-spacing;
+      header {
+        font-size: 1.5rem;
+        padding-bottom: 1rem;
+        color: $dark-subtitle-text;
+        text-align: center;
+      }
     }
     :last-child {
       margin-bottom: 0;
     }
   }
   div#main-content-left-top {
-    flex: 2;
     margin-bottom: $main-content-spacing;
+  }
+
+  div#main-content-right-bottom {
+    section#education-section {
+      div.container {
+        display: flex;
+        i {
+          color: $dark-subtitle-text;
+          margin-right: 1rem;
+        }
+        div.sub-container {
+          display: flex;
+          flex-direction: column;
+          p.degree {
+            font-weight: 600;
+          }
+          p.school {
+            color: $dark-subtitle-text;
+          }
+        }
+      }
+    }
   }
 }
 
@@ -105,8 +132,8 @@ main {
     }
     div#top-header-info {
       margin-left: 2.5rem;
+      text-align: left;
       div#top-header-icons {
-        text-align: left;
         margin-top: 1rem;
       }
     }
