@@ -36,7 +36,7 @@ body {
 }
 
 div#top-spacer {
-  background-color: $primary-color;
+  background-color: $dark-text;
   height: 0.5rem;
 }
 
@@ -103,6 +103,27 @@ main {
   }
 
   div#main-content-right-bottom {
+    section#contact-section {
+      div.container {
+        display: flex;
+        flex-direction: column;
+        p {
+          margin-bottom: 0.5rem;
+        }
+        i {
+          color: $dark-subtitle-text;
+          margin-right: 0.5rem;
+        }
+        a {
+          @extend %transition-base;
+          text-decoration: none;
+          color: $dark-subtitle-text;
+        }
+        a:hover {
+          color: $dark-text;
+        }
+      }
+    }
     section#skills-section {
       div.container {
         display: flex;
@@ -164,6 +185,28 @@ main {
   }
 }
 
+footer {
+  text-align: center;
+  padding: 0.5rem 0;
+  background-color: $dark-text;
+  color: $surface-color;
+  font-size: 0.85rem;
+  div#footer-icons {
+    a {
+      @extend %transition-base;
+      color: $surface-color;
+      font-size: 1.75rem;
+      &:hover {
+        color: $primary-color;
+      }
+      margin-right: 1rem;
+    }
+    :last-child {
+      margin-right: 0;
+    }
+  }
+}
+
 // LARGER SCREENS
 @media only screen and (min-width: 768px) {
   header#top-header {
@@ -190,6 +233,15 @@ main {
     }
     div#main-content-right-bottom {
       flex: 1;
+    }
+  }
+
+  footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    div#footer-icons {
+      margin-left: 1rem;
     }
   }
 }
