@@ -10,7 +10,6 @@
       src="https://kit.fontawesome.com/e750972312.js"
       crossorigin="anonymous"
     ></script>
-    <script src="scripts.js"></script>
     <link rel="stylesheet" href="styles/styles.min.css" />
   </head>
 
@@ -36,69 +35,145 @@
       <div class="main-content left-top">
         <section>
           <header>About Me</header>
-          I am an experienced software developer looking for the opportunity to
-          provide unique solutions for unique business needs. Looking for a
-          company with a focus on collaborative learning and skill set
-          development.
+          I didn't take the typical path to becoming a software developer. As a
+          kid I was always curious about how things were built and was good at
+          math and science. I even 'dissected' an old computer in my bedroom,
+          but in reality it was more of a demolition. After high school, I went
+          to an engineering focused college in hopes of being a Civil Engineer,
+          but quickly found it didn't interest me. I changed my focus to
+          business because I've always liked math and my new department required
+          me to take an Information Systems class. There I found my passion for
+          computers and how they work. My first programming language was Java
+          and I loved tinkering around and making little terminal applications.
+          My Java skills grew further at my first two jobs, but my love for
+          stopped. In my own time I tought myself JavaScript, HTML, and CSS
+          building small sites and single-purpose applications. From there I
+          learned React and TypeScript and that helped me land to my current job
+          at Coolfire Solutions. Today, I enjoy the work that I do for Coolfire
+          and am still learning new things outside of work.
         </section>
-        <section>
+        <section class="project-section">
           <header>Past Projects</header>
-          <div class="name">
-            <h4>Project Manager</h4>
-            <a href="https://www.github.com/nickcoffey/design">Source Code</a>
-          </div>
+          <h4>
+            Workout Tracker -
+            <a href="https://www.github.com/nickcoffey/tracker-native"
+              ><i class="fas fa-external-link-alt"></i> Source Code</a
+            >
+          </h4>
           <ul>
             <li>
-              Lead developer and designer on a team that created a custom web
-              application for a local waterproofing company
+              There are many workout tracking and fitness applications on the
+              market, but I wanted one that I could call my own.
             </li>
             <li>
-              The built solution estimates bid prices based on labor, material,
-              and equipment costs. It tracks the profitability of one or more
-              jobs over any given range
+              Building my own workout tracker also gave me an excuse to learn
+              React Native and GraphQL.
             </li>
             <li>
-              Though this was a requirement for a capstone course for my B.S.
-              program, it is in current production use.
+              I decided to build my own Apollo backend for this project as well
+              as a frontend using Expo.
+            </li>
+            <li>
+              The application is simple, but it allows me to digitally track my
+              progress instead of on paper.
+            </li>
+          </ul>
+          <header>Past Projects</header>
+          <h4>
+            This Site! -
+            <a href="https://www.github.com/nickcoffey/nickcoffey.github.io"
+              ><i class="fas fa-external-link-alt"></i> Source Code</a
+            >
+          </h4>
+          <ul>
+            <li>
+              I wanted/needed a personal website to act as my portfolio and I
+              figured it was the perfect opportunity to make my own without a
+              website builder's help.
+            </li>
+            <li>
+              This site is built with HTML and CSS compiled from Sass. I'm not
+              quite a CSS guru, so I chose to learn a pre-processor during this
+              project.
+            </li>
+          </ul>
+          <h4>
+            Project Tracker -
+            <a href="https://www.github.com/nickcoffey/design"
+              ><i class="fas fa-external-link-alt"></i> Source Code</a
+            >
+          </h4>
+          <ul>
+            <li>
+              A custom web application built for a local waterproofing company
+              to track project performance.
+            </li>
+            <li>
+              The app estimates bid prices based on labor, material, and
+              equipment cost inputs from the user. It also tracks the
+              profitability of one or more jobs over any given range.
             </li>
             <li>
               It is built on a version of the MEAN stack: MySQL, ExpressJS,
               Angular 4, Node.js.
             </li>
-            <li>
-              The client did not want to utilize the cloud; a server was bought
-              and the entire application is hosted from an on premises Ubuntu
-              server.
-            </li>
+            <li>An on-premises Ubuntu server hosts the entire application.</li>
           </ul>
         </section>
-        <section>
+        <section class="work-section">
           <header>Work Experience</header>
           <h4>
-            AAA Missouri (Advanced Technologies Developer, May 2018 - February
-            2020)
+            Frontend Engineer - <span>Coolfire Solutions (2020 - Present)</span>
           </h4>
           <ul>
             <li>
-              Worked with a parallel Scrum team under the LeSS Agile framework
+              Work on the frontend team developing three main web applications.
             </li>
             <li>
-              Developed and fixed business logic in a JVM language named GoSu
+              The apps are being built with TypeScript React. Two of them are
+              using the Next.js framework.
             </li>
-            <li>Built and deployed code using Jenkins pipelines</li>
-            <li>Tested new enhancements and bug fixes in QA environments</li>
+            <li>
+              All testing is done in-house by the dev team with support unit
+              tests and integration tests written in Cypress.
+            </li>
           </ul>
           <h4>
-            Charter Communications (Business Analyst, July 2017 - May 2018)
+            Advanced Technologies Developer - <span>AAA (2018 - 2020)</span>
           </h4>
           <ul>
             <li>
-              Worked on the E-Commerce team; maintained the application that
-              serves all cable packages and customizations to public users
+              Helped develop and fix business logic in proprietary frameworks
+              called PolicyCenter and BillingCenter which are built on a JVM
+              language named GoSu.
             </li>
             <li>
-              Ran the weekly deployments and created and ran REST API tests in
-              SoapUI
+              Worked on a team of teams under the LeSS Agile framework
+              supporting the core insurance business application.
+            </li>
+            <li>
+              Our Jenkins server built and deployed code to a number of
+              different environments using my custom Jenkins pipelines.
+            </li>
+          </ul>
+          <h4>
+            Business Analyst - <span>Charter Communications (2017 - 2018)</span>
+          </h4>
+          <ul>
+            <li>
+              Worked on the E-Commerce team supporting the application that
+              helps users purchase and customize their cable service.
+            </li>
+            <li>
+              One of my main roles was to write and maintain Jenkins deployment
+              scripts. The scripts were run weekly and were tested with REST API
+              tests that I made in SoapUI.
+            </li>
+            <li>
+              My other main task was to build reports for displaying sales based
+              on factors such as location and cable package. The data was
+              sourced and cleaned with Alteryx and the visualizations were made
+              with Tableau.
             </li>
           </ul>
         </section>

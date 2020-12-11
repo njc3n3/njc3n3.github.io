@@ -43,6 +43,13 @@ body {
   color: $dark-text;
 }
 
+ul {
+  margin-bottom: 1rem;
+}
+li {
+  margin-bottom: 0.5rem;
+}
+
 .top-spacer {
   background-color: $dark-text;
   height: 0.5rem;
@@ -106,6 +113,22 @@ main {
 }
 .left-top {
   margin-bottom: $main-content-spacing;
+}
+.project-section {
+  h4 {
+    margin-bottom: 1rem;
+    a {
+      @include link-mixin($dark-subtitle-text, $dark-text);
+    }
+  }
+}
+.work-section {
+  h4 {
+    margin-bottom: 1rem;
+    span {
+      color: $dark-subtitle-text;
+    }
+  }
 }
 .contact-section {
   .container {
