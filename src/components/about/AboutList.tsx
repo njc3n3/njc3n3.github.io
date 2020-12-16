@@ -1,9 +1,13 @@
-import { ReactNode } from 'react'
+import { ReactNode, useContext } from 'react'
 import styled from 'styled-components'
+import { ThemeContext } from '../..'
 
-const Container = styled.div`
+const Container = styled.div<{ subtitleColor: string }>`
   h4 {
     margin-bottom: 1rem;
+    span {
+      color: ${({ subtitleColor }) => subtitleColor};
+    }
   }
   ul {
     margin-bottom: 1rem;
@@ -24,10 +28,12 @@ type Props = {
 }
 
 export default function AboutList({ header, subheader, items }: Props) {
+  const { darkSubtitleText } = useContext(ThemeContext)
+
   return (
-    <Container>
+    <Container subtitleColor={darkSubtitleText}>
       <h4>
-        {header} - {subheader}
+        {header} - <span>{subheader}</span>
       </h4>
       <ul>
         {items.map((item, index) => (
