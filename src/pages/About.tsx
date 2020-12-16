@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import styled, { css } from 'styled-components'
 import { ThemeContext } from '..'
-import { AboutMe, ContactMe, Education, PastProjects, WorkExperience } from '../components/about'
+import { AboutMe, ContactMe, Education, PastProjects, TechnicalSkills, WorkExperience } from '../components/about'
 import { largeScreenMixin } from '../styles'
 
 function LargeContainerStyles(spacing: string) {
@@ -40,6 +40,7 @@ export default function About() {
       </div>
       <div className='right-bottom'>
         <ContactMe />
+        <TechnicalSkills />
         <Education />
       </div>
     </Container>
