@@ -1,4 +1,12 @@
+import { useContext } from 'react'
+import { ThemeContext } from '.'
+
 function App() {
+  const theme = useContext(ThemeContext)
+  const bodyStyles = document.body.style
+  bodyStyles.backgroundColor = theme.backgroundColor
+  bodyStyles.color = theme.darkText
+
   return (
     <div className='App'>
       <header className='App-header'>
