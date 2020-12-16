@@ -4,6 +4,7 @@ import { useContext } from 'react'
 import styled from 'styled-components'
 import { ThemeContext } from '../..'
 import { Link } from '../general'
+import AboutContent from './AboutContent'
 
 const Container = styled.div`
   display: flex;
@@ -22,14 +23,16 @@ export default function ContactMe() {
   const { darkSubtitleText } = useContext(ThemeContext)
 
   return (
-    <Container>
-      <p>
-        <StyledIcon icon={faMapMarkerAlt} color={darkSubtitleText} /> St. Louis, MO
-      </p>
-      <p>
-        <StyledIcon icon={faEnvelope} color={darkSubtitleText} />
-        <Link href='mailto:nicholasjcoffey@gmail.com'>nicholasjcoffey@gmail.com</Link>
-      </p>
-    </Container>
+    <AboutContent header='Contact Me'>
+      <Container>
+        <p>
+          <StyledIcon icon={faMapMarkerAlt} color={darkSubtitleText} /> St. Louis, MO
+        </p>
+        <p>
+          <StyledIcon icon={faEnvelope} color={darkSubtitleText} />
+          <Link href='mailto:nicholasjcoffey@gmail.com'>nicholasjcoffey@gmail.com</Link>
+        </p>
+      </Container>
+    </AboutContent>
   )
 }
