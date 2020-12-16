@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import styled, { css } from 'styled-components'
 import { ThemeContext } from '.'
-import { Header } from './components'
+import { Header, Footer } from './components'
 import { About } from './pages'
 import { largeScreenMixin } from './styles'
 
@@ -27,6 +27,7 @@ function App() {
       <StyledMain spacing={mainSpacing}>
         <About />
       </StyledMain>
+      <Footer />
     </>
   )
 }

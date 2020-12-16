@@ -15,12 +15,14 @@ const StyledLink = styled.a<{ color: string; hoverColor: string }>`
 
 type Props = {
   children?: ReactNode
+  color?: string
+  hoverColor?: string
 } & AnchorHTMLAttributes<HTMLAnchorElement>
 
-export default function Link({ children, ...props }: Props) {
+export default function Link({ children, color, hoverColor, ...props }: Props) {
   const { darkSubtitleText, darkText } = useContext(ThemeContext)
   return (
-    <StyledLink color={darkSubtitleText} hoverColor={darkText} {...props}>
+    <StyledLink color={color ?? darkSubtitleText} hoverColor={hoverColor ?? darkText} {...props}>
       {children}
     </StyledLink>
   )
