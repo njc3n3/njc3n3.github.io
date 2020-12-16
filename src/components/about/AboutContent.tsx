@@ -15,7 +15,7 @@ type Props = {
   children: ReactNode
 }
 
-export default function AboutSection({ header, children }: Props) {
+export default function AboutContent({ header, children }: Props) {
   const { darkSubtitleText } = useContext(ThemeContext)
 
   return (
