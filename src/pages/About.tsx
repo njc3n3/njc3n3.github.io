@@ -4,6 +4,7 @@ import { useContext } from 'react'
 import styled, { css } from 'styled-components'
 import { ThemeContext } from '..'
 import { AboutContent, AboutList } from '../components/about'
+import { Link } from '../components/general'
 import { largeScreenMixin } from '../styles'
 
 function LargeContainerStyles(spacing: string) {
@@ -31,9 +32,9 @@ const Container = styled.div<{ spacing: string }>`
 `
 
 const RepoLink = ({ repo }: { repo: string }) => (
-  <a href={`https://www.github.com/nickcoffey/${repo}`}>
+  <Link href={`https://www.github.com/nickcoffey/${repo}`}>
     <FontAwesomeIcon icon={faExternalLinkAlt} /> Source Code
-  </a>
+  </Link>
 )
 
 export default function About() {

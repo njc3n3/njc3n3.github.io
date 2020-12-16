@@ -8,3 +8,9 @@ export function largeScreenMixin(innerCSS: FlattenSimpleInterpolation) {
     }
   `
 }
+
+export function transitionMixin(property: string) {
+  return css`
+    transition: ${property} 0.18s ease-in-out;
+  `
+}
