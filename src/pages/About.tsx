@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useContext } from 'react'
 import styled, { css } from 'styled-components'
 import { ThemeContext } from '..'
-import { AboutContent, AboutList } from '../components/about'
+import { AboutContent, AboutList, ContactMe } from '../components/about'
 import { Link } from '../components/general'
 import { largeScreenMixin } from '../styles'
 
@@ -116,14 +116,8 @@ export default function About() {
         </AboutContent>
       </div>
       <div className='right-bottom'>
-        <AboutContent header='Testing'>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem repudiandae dolor harum unde vero explicabo
-          aut porro, illo laboriosam molestiae minus? Sequi repellat natus facere amet impedit fugiat soluta itaque
-          accusantium accusamus reprehenderit voluptas eveniet, quo fuga voluptatem quasi adipisci iure quibusdam nobis
-          nulla sint error quaerat exercitationem! Hic voluptates iste rerum harum adipisci expedita? Velit delectus vel
-          debitis quasi totam nisi, magnam iure nulla alias numquam cupiditate dolor dolores minus similique culpa ea
-          optio natus adipisci quibusdam facere. Rem sapiente hic quae cumque aliquam animi voluptatem iste
-          reprehenderit vel, fugiat perspiciatis ipsa maiores eligendi porro aut eius, sint doloribus!
+        <AboutContent header='Contact Me'>
+          <ContactMe />
         </AboutContent>
       </div>
     </Container>
