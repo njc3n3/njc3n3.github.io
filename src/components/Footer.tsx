@@ -25,11 +25,11 @@ const StyledFooter = styled.footer<{ color: string; textColor: string }>`
 
   .footer-icons {
     a {
-      margin-right: 1rem;
+      margin-right: 1.25rem;
       font-size: 1.75rem;
-    }
-    :last-child {
-      margin-right: 0;
+      :last-of-type {
+        margin-right: 0;
+      }
     }
   }
 

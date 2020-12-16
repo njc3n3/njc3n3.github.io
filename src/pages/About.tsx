@@ -21,9 +21,9 @@ const Container = styled.div<{ spacing: string }>`
   flex-direction: column;
   section {
     margin-bottom: ${({ spacing }) => spacing};
-  }
-  :last-child {
-    margin-bottom: 0;
+    :last-of-type {
+      margin-bottom: 0;
+    }
   }
   ${({ spacing }) => largeScreenMixin(LargeContainerStyles(spacing))}
 `
