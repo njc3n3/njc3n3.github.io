@@ -2,14 +2,7 @@ import React, { createContext } from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
 import App from './App'
-
-const theme = {
-  primaryColor: ' #909e9b',
-  backgroundColor: ' #cce3de',
-  surfaceColor: '#f6fff8',
-  darkText: '#302f2f',
-  darkSubtitleText: '#302f2fa8'
-}
+import { theme } from './styles'
 
 export const ThemeContext = createContext(theme)
 
