@@ -1,3 +1,5 @@
+import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useContext } from 'react'
 import styled, { css } from 'styled-components'
 import { ThemeContext } from '..'
@@ -28,6 +30,12 @@ const Container = styled.div<{ spacing: string }>`
   ${({ spacing }) => largeScreenMixin(LargeContainerStyles(spacing))}
 `
 
+const RepoLink = ({ repo }: { repo: string }) => (
+  <a href={`https://www.github.com/nickcoffey/${repo}`}>
+    <FontAwesomeIcon icon={faExternalLinkAlt} /> Source Code
+  </a>
+)
+
 export default function About() {
   const { mainSpacingRem } = useContext(ThemeContext)
 
@@ -49,11 +57,7 @@ export default function About() {
         <AboutContent header='Past Projects'>
           <AboutList
             header='Workout Tracker'
-            subheader={
-              <a href='https://www.github.com/nickcoffey/tracker-native'>
-                <i className='fas fa-external-link-alt'></i> Source Code
-              </a>
-            }
+            subheader={<RepoLink repo='tracker-native' />}
             items={[
               'There are many workout tracking and fitness applications on the market, but I wanted one that I could call my own.',
               'Building my own workout tracker also gave me an excuse to learn React Native and GraphQL.',
@@ -63,11 +67,7 @@ export default function About() {
           />
           <AboutList
             header='This Site!'
-            subheader={
-              <a href='https://www.github.com/nickcoffey/nickcoffey.github.io'>
-                <i className='fas fa-external-link-alt'></i> Source Code
-              </a>
-            }
+            subheader={<RepoLink repo='nickcoffey.github.io' />}
             items={[
               "I wanted/needed a personal website to act as my portfolio and I figured it was the perfect opportunity to make my own without a website builder's help.",
               "This site is built with HTML and CSS compiled from Sass. I'm not quite a CSS guru, so I chose to learn a pre-processor during this project."
@@ -75,11 +75,7 @@ export default function About() {
           />
           <AboutList
             header='Project Tracker'
-            subheader={
-              <a href='https://www.github.com/nickcoffey/design'>
-                <i className='fas fa-external-link-alt'></i> Source Code
-              </a>
-            }
+            subheader={<RepoLink repo='design' />}
             items={[
               'A custom web application built for a local waterproofing company to track project performance.',
               'The app estimates bid prices based on labor, material, and equipment cost inputs from the user. It also tracks the profitability of one or more jobs over any given range.',
