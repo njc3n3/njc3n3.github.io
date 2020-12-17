@@ -14,6 +14,7 @@
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.53",
     "@types/react-dom": "^16.9.8",
+    "express": "^4.17.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-scripts": "4.0.1",
@@ -21,13 +22,15 @@
     "typescript": "^4.0.3"
   },
   "devDependencies": {
-    "@types/styled-components": "^5.1.5"
+    "@types/styled-components": "^5.1.5",
+    "nodemon": "^2.0.6"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node server/index.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "dev": "nodemon server/index.js"
   },
   "eslintConfig": {
     "extends": [
