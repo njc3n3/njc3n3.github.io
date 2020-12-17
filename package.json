@@ -1,5 +1,4 @@
 {
-  "homepage": "https://nickcoffey.github.io/nickcoffey.github.io",
   "name": "portfolio",
   "version": "0.1.0",
   "private": true,
@@ -22,12 +21,9 @@
     "typescript": "^4.0.3"
   },
   "devDependencies": {
-    "@types/styled-components": "^5.1.5",
-    "gh-pages": "^3.1.0"
+    "@types/styled-components": "^5.1.5"
   },
   "scripts": {
-    "predeploy": "yarn run build",
-    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
