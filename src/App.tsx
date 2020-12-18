@@ -1,7 +1,8 @@
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import styled, { css } from 'styled-components'
 import { ThemeContext } from '.'
 import { Header, Footer } from './components'
+import { Modal } from './components/general'
 import { About } from './pages'
 import { largeScreenMixin } from './styles'
 
@@ -16,16 +17,32 @@ const StyledMain = styled.main<{ spacing: number }>`
 `
 
 function App() {
+  const [isLoginOpen, setIsLoginOpen] = useState(false)
   const { backgroundColor, darkText, mainSpacing } = useContext(ThemeContext)
   const bodyStyles = document.body.style
   bodyStyles.backgroundColor = backgroundColor
   bodyStyles.color = darkText
+
+  useEffect(() =>
+    document.addEventListener(
+      'keyup',
+      e => {
+        if (e.altKey && e.key === 'l') {
+          setIsLoginOpen(true)
+        }
+      },
+      false
+    )
+  )
 
   return (
     <>
       <Header />
       <StyledMain spacing={mainSpacing}>
         <About />
+        <Modal isOpen={isLoginOpen} close={() => setIsLoginOpen(false)}>
+          Login
+        </Modal>
       </StyledMain>
       <Footer />
     </>

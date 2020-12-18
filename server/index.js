@@ -18,12 +18,6 @@ const baseURL = '/api'
 exports.baseURL = baseURL
 const port = process.env.PORT
 
-const { authenticateToken } = require('./utils/auth.js')
-
-app.get(`${baseURL}/test`, authenticateToken, (req, res) => {
-  res.send({ text: `You sent ${req.body.text}` })
-})
-
 app.use(`${baseURL}/user`, require('./routes/user'))
 app.use(`${baseURL}/posts`, require('./routes/posts'))
 
