@@ -4,6 +4,14 @@ import { ThemeContext } from '..'
 import { AboutMe, ContactMe, Education, PastProjects, TechnicalSkills, WorkExperience } from '../components/about'
 import { largeScreenMixin } from '../styles'
 
+const noBottomMarginMixin = css`
+  section {
+    :last-of-type {
+      margin-bottom: 0;
+    }
+  }
+`
+
 function LargeContainerStyles(spacing: string) {
   return css`
     flex-direction: row;
@@ -14,6 +22,7 @@ function LargeContainerStyles(spacing: string) {
     .right-bottom {
       flex: 1;
     }
+    ${noBottomMarginMixin};
   `
 }
 const Container = styled.div<{ spacing: string }>`
@@ -21,9 +30,9 @@ const Container = styled.div<{ spacing: string }>`
   flex-direction: column;
   section {
     margin-bottom: ${({ spacing }) => spacing};
-    :last-of-type {
-      margin-bottom: 0;
-    }
+  }
+  .right-bottom {
+    ${noBottomMarginMixin};
   }
   ${({ spacing }) => largeScreenMixin(LargeContainerStyles(spacing))}
 `
