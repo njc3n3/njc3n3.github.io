@@ -1,11 +1,11 @@
 const router = require('express').Router()
 const { generateAccessToken } = require('../utils/auth')
-const { sendErrorResponse, sendResponse, _idStrippedDoc } = require('../utils/response')
+const { sendErrorResponse, sendDataResponse, _idStrippedDoc } = require('../utils/response')
 const { addUser, getUserByUsername, comparePassword } = require('../models/user')
 
 function genTokenSendUserRes(res, username, user) {
   const token = generateAccessToken({ username })
-  sendResponse(res, { token, ..._idStrippedDoc(user) })
+  sendDataResponse(res, { token, ..._idStrippedDoc(user) })
 }
 
 router.post('/register', (req, res) => {

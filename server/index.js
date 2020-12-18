@@ -25,6 +25,7 @@ app.get(`${baseURL}/test`, authenticateToken, (req, res) => {
 })
 
 app.use(`${baseURL}/user`, require('./routes/user'))
+app.use(`${baseURL}/posts`, require('./routes/posts'))
 
 app.get('*', (_req, res) => {
   res.sendFile(path.join(__dirname + '../build/index.html'))
@@ -32,7 +33,7 @@ app.get('*', (_req, res) => {
 
 mongoose.connect(
   `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@portfolio-cluster.1k2ue.mongodb.net/portfolio?retryWrites=true&w=majority`,
-  { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }
+  { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false }
 )
 const db = mongoose.connection
 db.on('error', () => logger.fatal('DB connection failed'))
