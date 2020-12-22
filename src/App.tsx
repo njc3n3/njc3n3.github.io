@@ -1,9 +1,10 @@
 import { useContext, useEffect, useState } from 'react'
 import styled, { css } from 'styled-components'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { ThemeContext } from '.'
 import { Header, Footer, Login } from './components'
 import { Modal } from './components/general'
-import { About } from './pages'
+import { About, Posts } from './pages'
 import { largeScreenMixin } from './styles'
 
 function LargeMainStyles(spacing: number) {
@@ -36,16 +37,23 @@ function App() {
   )
 
   return (
-    <>
+    <Router>
       <Header />
       <StyledMain spacing={mainSpacing}>
-        <About />
+        <Switch>
+          <Route exact path='/'>
+            <About />
+          </Route>
+          <Route path='/posts'>
+            <Posts />
+          </Route>
+        </Switch>
         <Modal isOpen={isLoginOpen} close={() => setIsLoginOpen(false)}>
           <Login />
         </Modal>
       </StyledMain>
       <Footer />
-    </>
+    </Router>
   )
 }
 

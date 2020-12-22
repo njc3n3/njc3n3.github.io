@@ -1,8 +1,10 @@
 import { useContext } from 'react'
 import styled, { css } from 'styled-components'
+import { Link as RouterLink } from 'react-router-dom'
 import { ThemeContext } from '..'
 import profile from '../assets/profile.jpg'
 import { largeScreenMixin } from '../styles'
+import { Link } from './general'
 
 type StyledHeaderProps = {
   backgroundColor: string
@@ -47,8 +49,17 @@ const StyledHeader = styled.header<StyledHeaderProps>`
     font-size: 1.5rem;
     color: ${({ titleColor }) => titleColor};
   }
+  .links {
+    margin-top: 1rem;
+    font-weight: bold;
+    font-size: 1.15rem;
+  }
 
   ${largeScreenMixin(LargeHeaderStyles)}
+`
+
+const StyledLink = styled(RouterLink)`
+  text-decoration: none;
 `
 
 export default function Header() {
@@ -62,6 +73,15 @@ export default function Header() {
         <div className='info'>
           <p className='name'>Nick Coffey</p>
           <p className='title'>Frontend Engineer</p>
+          <div className='links'>
+            <StyledLink to='/'>
+              <Link>About</Link>
+            </StyledLink>
+            {' | '}
+            <StyledLink to='/posts'>
+              <Link>Posts</Link>
+            </StyledLink>
+          </div>
         </div>
       </StyledHeader>
     </>
