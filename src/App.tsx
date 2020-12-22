@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react'
 import styled, { css } from 'styled-components'
 import { ThemeContext } from '.'
-import { Header, Footer } from './components'
+import { Header, Footer, Login } from './components'
 import { Modal } from './components/general'
 import { About } from './pages'
 import { largeScreenMixin } from './styles'
@@ -41,7 +41,7 @@ function App() {
       <StyledMain spacing={mainSpacing}>
         <About />
         <Modal isOpen={isLoginOpen} close={() => setIsLoginOpen(false)}>
-          Login
+          <Login />
         </Modal>
       </StyledMain>
       <Footer />

@@ -7,7 +7,7 @@ const StyledButton = styled.button<{ color: string; textColor: string; hoverColo
   color: ${({ textColor }) => textColor};
   background-color: ${({ color }) => color};
   border: none;
-  font-weight: 900;
+  text-transform: uppercase;
   cursor: pointer;
   padding: 0.5rem 1rem;
   ${transitionMixin('background-color')}
@@ -18,12 +18,18 @@ const StyledButton = styled.button<{ color: string; textColor: string; hoverColo
 
 type Props = {
   children?: ReactNode
+  color?: 'primary' | 'secondary'
 } & ButtonHTMLAttributes<HTMLButtonElement>
 
-export default function Button({ children, ...props }: Props) {
+export default function Button({ children, color = 'primary', ...props }: Props) {
   const { darkText, surfaceColor, primaryColor } = useContext(ThemeContext)
   return (
-    <StyledButton color={darkText} hoverColor={primaryColor} textColor={surfaceColor} {...props}>
+    <StyledButton
+      color={color === 'primary' ? darkText : primaryColor}
+      hoverColor={color === 'primary' ? primaryColor : darkText}
+      textColor={surfaceColor}
+      {...props}
+    >
       {children}
     </StyledButton>
   )
