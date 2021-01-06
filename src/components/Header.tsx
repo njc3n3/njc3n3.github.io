@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { Fragment, useContext, useState } from 'react'
 import styled, { css } from 'styled-components'
 import { Link as RouterLink } from 'react-router-dom'
 import { ThemeContext } from '..'
@@ -97,8 +97,14 @@ const StyledImage = styled.div<{ backColor: string }>`
   ${largeScreenMixin(LargeImageStyles)}
 `
 
-const StyledLink = styled(RouterLink)`
+const StyledLink = styled(RouterLink)<{ color: string; hover: string }>`
+  color: ${({ color }) => color};
   text-decoration: none;
+
+  ${transitionMixin('color')}
+  &:hover {
+    color: ${({ hover }) => hover};
+  }
 `
 
 export default function Header() {
@@ -107,6 +113,11 @@ export default function Header() {
   const [isLoginOpen, setIsLoginOpen] = useState(false)
 
   const closeModal = () => setIsLoginOpen(false)
+
+  const links = [
+    { to: '/', text: 'About' },
+    { to: '/posts', text: 'Posts' }
+  ]
 
   return (
     <>
@@ -138,13 +149,14 @@ export default function Header() {
           <p className='name'>Nick Coffey</p>
           <p className='title'>Frontend Engineer</p>
           <div className='links'>
-            <StyledLink to='/'>
-              <Link>About</Link>
-            </StyledLink>
-            {' | '}
-            <StyledLink to='/posts'>
-              <Link>Posts</Link>
-            </StyledLink>
+            {links.map(({ to, text }, index) => (
+              <Fragment key={index}>
+                <StyledLink to={to} color={darkSubtitleText} hover={darkText}>
+                  {text}
+                </StyledLink>
+                {index < links.length - 1 ? ' | ' : null}
+              </Fragment>
+            ))}
           </div>
         </div>
       </StyledHeader>
