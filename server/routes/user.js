@@ -5,7 +5,8 @@ const { addUser, getUserByUsername, comparePassword } = require('../models/user'
 
 function genTokenSendUserRes(res, username, user) {
   const token = generateAccessToken({ username })
-  sendDataResponse(res, { token, ..._idStrippedDoc(user) })
+  const { password, ...restUser } = user
+  sendDataResponse(res, { token, ..._idStrippedDoc(restUser) })
 }
 
 router.post('/register', (req, res) => {

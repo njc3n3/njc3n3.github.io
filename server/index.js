@@ -1,6 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
+const cors = require('cors')
 const path = require('path')
 const log4js = require('log4js')
 require('dotenv').config()
@@ -13,6 +14,8 @@ exports.logger = logger
 
 app.use(bodyParser.json())
 app.use(express.static(path.join(__dirname, '../build')))
+
+app.use(cors());
 
 const baseURL = '/api'
 exports.baseURL = baseURL

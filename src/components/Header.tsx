@@ -106,6 +106,8 @@ export default function Header() {
   const [flipImage, setFlipImage] = useState(false)
   const [isLoginOpen, setIsLoginOpen] = useState(false)
 
+  const closeModal = () => setIsLoginOpen(false)
+
   return (
     <>
       <Spacer color={darkText} />
@@ -120,9 +122,15 @@ export default function Header() {
               <img src={profile} alt='Profile' />
             </div>
             <div className='back'>
-              <Link onClick={() => setIsLoginOpen(true)}>
-                <h3>Login</h3>
-              </Link>
+              {!localStorage.getItem('token') ? (
+                <Link onClick={() => setIsLoginOpen(true)}>
+                  <h3>Login</h3>
+                </Link>
+              ) : (
+                <Link onClick={() => localStorage.clear()}>
+                  <h3>Logout</h3>
+                </Link>
+              )}
             </div>
           </div>
         </StyledImage>
@@ -140,8 +148,8 @@ export default function Header() {
           </div>
         </div>
       </StyledHeader>
-      <Modal isOpen={isLoginOpen} close={() => setIsLoginOpen(false)}>
-        <Login />
+      <Modal isOpen={isLoginOpen} close={closeModal}>
+        <Login closeModal={closeModal} />
       </Modal>
     </>
   )
