@@ -1,22 +1,19 @@
 const { Schema, model } = require('mongoose')
 
-const postSchema = new Schema({
-  author: {
-    type: Schema.Types.ObjectId,
-    ref: 'User',
-    required: true
+const postSchema = new Schema(
+  {
+    text: {
+      type: String,
+      required: true
+    }
   },
-  text: {
-    type: String,
-    required: true
-  }
-}).set('toJSON', { virtuals: true })
+  { timestamps: { createdAt: 'created', updatedAt: 'updated' } }
+).set('toJSON', { virtuals: true })
 
 const Post = model('Post', postSchema)
 
 exports.addPost = (post, cb) => {
-  const { userId, text } = post
-  const newPost = new Post({ author: userId, text })
+  const newPost = new Post(post)
   newPost
     .save()
     .then(post => {
@@ -27,8 +24,8 @@ exports.addPost = (post, cb) => {
     })
 }
 
-exports.getUserPosts = (userId, cb) => {
-  Post.find({ author: userId })
+exports.getAllPosts = cb => {
+  Post.find({})
     .then(posts => {
       cb(posts)
     })
