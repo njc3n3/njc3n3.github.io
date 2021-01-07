@@ -1,7 +1,8 @@
-import { createElement, Fragment } from 'react'
+import { Link } from 'react-router-dom'
 import { useQuery } from '../hooks'
+import { Content } from '../components/general'
 
-type Post = {
+export type PostType = {
   id: string
   title: string
   created: string
@@ -9,19 +10,8 @@ type Post = {
   content: { tag: string; text?: string; src?: string }[]
 }
 
-function getJSX(tag: string, text: string = '', src?: string) {
-  let element = <></>
-  if (tag === 'img' && src) {
-    element = createElement(tag, { src, width: '100%', style: { borderRadius: '0.25rem' } })
-  } else {
-    element = createElement(tag, null, text)
-  }
-
-  return element
-}
-
 export default function Posts() {
-  const { data, loading, error } = useQuery<{ posts: Post[] }>('posts')
+  const { data, loading, error } = useQuery<{ posts: PostType[] }>('posts')
 
   let content = <></>
   if (error) {
@@ -31,19 +21,13 @@ export default function Posts() {
   } else {
     content = (
       <div style={{ marginTop: '1rem' }}>
-        {data?.posts.map((post, index) => (
-          <Fragment key={index}>
-            <div
-              style={{
-                overflowWrap: 'break-word',
-                marginBottom: index < data.posts.length - 1 ? '1rem' : undefined
-              }}
-            >
-              {post.content.map(({ tag, text, src }, index) => (
-                <Fragment key={index}>{getJSX(tag, text, src)}</Fragment>
-              ))}
-            </div>
-          </Fragment>
+        {data?.posts.map(({ title, created, id }, index) => (
+          <Content key={index}>
+            <Link to={`/posts/${id}`}>
+              <h1>{title}</h1>
+            </Link>
+            <p>{created}</p>
+          </Content>
         ))}
       </div>
     )

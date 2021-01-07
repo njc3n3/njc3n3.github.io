@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { ThemeContext } from '.'
 import { Header, Footer } from './components'
-import { About, Posts } from './pages'
+import { About, Posts, Post } from './pages'
 import { largeScreenMixin } from './styles'
 
 function LargeMainStyles(spacing: number) {
@@ -30,8 +30,11 @@ function App() {
           <Route exact path='/'>
             <About />
           </Route>
-          <Route path='/posts'>
+          <Route exact path='/posts'>
             <Posts />
+          </Route>
+          <Route exact path='/posts/:id'>
+            <Post />
           </Route>
         </Switch>
       </StyledMain>
