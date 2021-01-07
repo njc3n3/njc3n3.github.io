@@ -20,9 +20,9 @@ export default function useMutation(url: string, operation: Operation, onSuccess
     setLoading(false)
   }
 
+  const fullURL = `${serverURL}/${url}`
   const runMutation = (input: any) => {
     setLoading(true)
-    const fullURL = `${serverURL}/${url}`
     switch (operation) {
       case 'post':
         axios.post(fullURL, input).then(handleSuccess).catch(handleError)
