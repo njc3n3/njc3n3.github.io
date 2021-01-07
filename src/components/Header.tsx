@@ -97,7 +97,7 @@ const StyledImage = styled.div<{ backColor: string }>`
   ${largeScreenMixin(LargeImageStyles)}
 `
 
-const StyledLink = styled(RouterLink)<{ color: string; hover: string }>`
+export const StyledLink = styled(RouterLink)<{ color: string; hover: string }>`
   color: ${({ color }) => color};
   text-decoration: none;
 

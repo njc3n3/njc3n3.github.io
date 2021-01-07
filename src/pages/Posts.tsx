@@ -1,6 +1,8 @@
-import { Link } from 'react-router-dom'
 import { useQuery } from '../hooks'
 import { Content } from '../components/general'
+import { StyledLink } from '../components'
+import { ThemeContext } from '..'
+import { useContext } from 'react'
 
 export type PostType = {
   id: string
@@ -12,6 +14,7 @@ export type PostType = {
 
 export default function Posts() {
   const { data, loading, error } = useQuery<{ posts: PostType[] }>('posts')
+  const { mainSpacingRem, darkSubtitleText, darkText } = useContext(ThemeContext)
 
   let content = <></>
   if (error) {
@@ -20,23 +23,18 @@ export default function Posts() {
     content = <h3>Loading...</h3>
   } else {
     content = (
-      <div style={{ marginTop: '1rem' }}>
+      <>
         {data?.posts.map(({ title, created, id }, index) => (
-          <Content key={index}>
-            <Link to={`/posts/${id}`}>
+          <Content key={index} style={{ marginBottom: index < data.posts.length - 1 ? mainSpacingRem : undefined }}>
+            <StyledLink to={`/posts/${id}`} color={darkText} hover={darkSubtitleText}>
               <h1>{title}</h1>
-            </Link>
-            <p>{created}</p>
+            </StyledLink>
+            <p>Posted: {new Date(created).toLocaleDateString()}</p>
           </Content>
         ))}
-      </div>
+      </>
     )
   }
 
-  return (
-    <>
-      <h1>Posts</h1>
-      {content}
-    </>
-  )
+  return <>{content}</>
 }
