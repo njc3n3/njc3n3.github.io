@@ -4,8 +4,8 @@ const { sendErrorResponse, sendDataResponse, sendMsgResponse, _idStrippedDoc } =
 const { authenticateToken } = require('../utils/auth')
 
 router.post('/create', authenticateToken, (req, res) => {
-  const { text } = req.body
-  addPost({ text }, (post, err) => {
+  const { title, content } = req.body
+  addPost({ title, content }, (post, err) => {
     if (err) {
       sendErrorResponse(res, 500, err)
     } else {
@@ -48,8 +48,8 @@ router.delete('', authenticateToken, (req, res) => {
 })
 
 router.put('', authenticateToken, (req, res) => {
-  const { id, text } = req.body
-  updatePost({ id, text }, (post, err) => {
+  const { id, title, content } = req.body
+  updatePost({ id, title, content }, (post, err) => {
     if (err) {
       sendErrorResponse(res, 500, err)
     } else {

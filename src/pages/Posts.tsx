@@ -1,7 +1,24 @@
-import { Fragment } from 'react'
+import { createElement, Fragment } from 'react'
 import { useQuery } from '../hooks'
 
-type Post = { id: string; created: string; updated: string; text: string }
+type Post = {
+  id: string
+  title: string
+  created: string
+  updated: string
+  content: { tag: string; text?: string; src?: string }[]
+}
+
+function getJSX(tag: string, text: string = '', src?: string) {
+  let element = <></>
+  if (tag === 'img' && src) {
+    element = createElement(tag, { src, width: '100%', style: { borderRadius: '0.25rem' } })
+  } else {
+    element = createElement(tag, null, text)
+  }
+
+  return element
+}
 
 export default function Posts() {
   const { data, loading, error } = useQuery<{ posts: Post[] }>('posts')
@@ -22,7 +39,9 @@ export default function Posts() {
                 marginBottom: index < data.posts.length - 1 ? '1rem' : undefined
               }}
             >
-              {post.text}
+              {post.content.map(({ tag, text, src }, index) => (
+                <Fragment key={index}>{getJSX(tag, text, src)}</Fragment>
+              ))}
             </div>
           </Fragment>
         ))}

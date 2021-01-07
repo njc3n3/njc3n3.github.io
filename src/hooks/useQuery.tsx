@@ -8,7 +8,7 @@ export default function useQuery<T>(url: string, onSuccess?: (res: AxiosResponse
   const [loading, setLoading] = useState(false)
 
   const handleError = (error: any) => {
-    setError(error.response.data.err)
+    setError(error.response?.data.err)
     setLoading(false)
   }
 
