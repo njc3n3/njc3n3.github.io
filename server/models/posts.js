@@ -2,7 +2,15 @@ const { Schema, model } = require('mongoose')
 
 const postSchema = new Schema(
   {
+    titleImg: {
+      type: String,
+      required: true
+    },
     title: {
+      type: String,
+      required: true
+    },
+    subtitle: {
       type: String,
       required: true
     },
@@ -67,8 +75,8 @@ exports.deletePost = (id, cb) => {
 }
 
 exports.updatePost = (post, cb) => {
-  const { id, content, title } = post
-  Post.findByIdAndUpdate(id, { content, title }, { new: true })
+  const { id, content, title, subtitle, titleImg } = post
+  Post.findByIdAndUpdate(id, { content, title, subtitle, titleImg }, { new: true })
     .then(post => {
       if (post) {
         cb(post.toJSON())

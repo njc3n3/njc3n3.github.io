@@ -8,6 +8,8 @@ function getJSX(tag: string, text: string = '', src?: string) {
   let element = <></>
   if (tag === 'img' && src) {
     element = createElement(tag, { src, width: '50%', style: { borderRadius: '0.25rem' } })
+  } else if (tag === 'a' && src) {
+    element = createElement(tag, { href: src }, text)
   } else if (tag === 'br') {
     element = createElement(tag)
   } else {
