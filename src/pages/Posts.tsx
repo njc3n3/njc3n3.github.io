@@ -1,54 +1,45 @@
 import { useContext } from 'react'
 import moment from 'moment'
 import styled, { css } from 'styled-components'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBookOpen } from '@fortawesome/free-solid-svg-icons'
+import { Link } from 'react-router-dom'
 import { useQuery } from '../hooks'
 import { Content } from '../components/general'
-import { StyledLink } from '../components'
 import { ThemeContext } from '..'
-import { largeScreenMixin } from '../styles'
+import { largeScreenMixin, transitionMixin } from '../styles'
 
 export type PostType = {
   id: string
-  titleImg: string
   title: string
-  subtitle: string
+  content: string
+  isPublished: boolean
+  tags: string[]
   created: string
   updated: string
-  content: { tag: string; text?: string; src?: string }[]
 }
 
-const LargeContainerStyles = css`
-  grid-template-columns: repeat(3, 1fr);
+const LargeContainerStyles = (spacing: number) => css`
+  padding: ${spacing}rem ${spacing * 8}rem;
 `
-const Container = styled.div<{ spacing: string }>`
+const Container = styled.div<{ spacing: number }>`
   display: grid;
   grid-template-columns: repeat(1, 1fr);
-  gap: ${({ spacing }) => spacing};
-  ${largeScreenMixin(LargeContainerStyles)}
+  gap: ${({ spacing }) => spacing}rem;
+  ${({ spacing }) => largeScreenMixin(LargeContainerStyles(spacing))}
 `
 
-const ImageContainer = styled.div`
-  height: 200px;
-  overflow: hidden;
-`
+const StyledLink = styled(Link)<{ hoverColor: string }>`
+  color: inherit;
+  text-decoration: none;
 
-const StyledImage = styled.img`
-  width: 100%;
-  display: block;
-  
-`
-
-const Title = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin: 0.5rem 0;
+  ${transitionMixin('color')}
+  &:hover {
+    color: ${({ hoverColor }) => hoverColor};
+  }
 `
 
 export default function Posts() {
   const { data, loading, error } = useQuery<{ posts: PostType[] }>('posts')
-  const { mainSpacingRem, darkSubtitleText, darkText } = useContext(ThemeContext)
+  const { mainSpacing, darkSubtitleText } = useContext(ThemeContext)
 
   let content = <></>
   if (error) {
@@ -57,24 +48,26 @@ export default function Posts() {
     content = <h3>Loading...</h3>
   } else {
     content = (
-      <Container spacing={mainSpacingRem}>
-        {data?.posts.map(({ title, subtitle, titleImg, created, id }, index) => (
-          <Content key={index}>
-            <ImageContainer>
-              <StyledImage src={titleImg} alt={title} />
-            </ImageContainer>
-            <Title>
-              <h3 color={darkSubtitleText}>{title}</h3>
-              <p>{moment(created).format('MMMM Do YYYY')}</p>
-            </Title>
-            <p style={{marginBottom: '0.5rem'}}>{subtitle}</p>
-            <StyledLink to={`/posts/${id}`} color={darkSubtitleText} hover={darkText}>
-              <h4>
-                <FontAwesomeIcon icon={faBookOpen} /> Read
-              </h4>
-            </StyledLink>
-          </Content>
-        ))}
+      <Container spacing={mainSpacing}>
+        {data?.posts.map(
+          ({ title, isPublished, tags, created, id }, index) =>
+            isPublished && (
+              <Content key={index}>
+                <StyledLink hoverColor={darkSubtitleText} to={`/posts/${id}`}>
+                  <h1 style={{ marginBottom: `${mainSpacing / 2}rem` }}>{title}</h1>
+                </StyledLink>
+                <p style={{ marginBottom: `${mainSpacing / 2}rem` }}>{moment(created).format('MMMM Do, YYYY')}</p>
+                {tags && (
+                  <p style={{ color: darkSubtitleText }}>
+                    {tags.reduce(
+                      (tagString, tag, index) => (tagString += `#${tag}${index !== tags.length - 1 ? ', ' : ''}`),
+                      ''
+                    )}
+                  </p>
+                )}
+              </Content>
+            )
+        )}
       </Container>
     )
   }
