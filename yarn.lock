@@ -10189,6 +10189,11 @@ react-is@^17.0.1:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.1.tgz#5b3531bd76a645a4c9fb6e693ed36419e3301339"
   integrity sha512-NAnt2iGDXohE5LI7uBnLnqvLQMtzhkiAOLXTmv+qnF9Ky7xAPcX8Up/xWIhxvLVGJvuLiNc4xQLtuqDRzb4fSA==
 
+react-jwt@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/react-jwt/-/react-jwt-1.1.0.tgz#1867dbc91c69bd2b7f5e7735104c5da57ec67719"
+  integrity sha512-MQPuJrSidARdnhAvvJYRx9O0AbSMWjPzeXGcyV/sZkD5CjYlRQ2qXAqchUrccEzeZZa5qsamMPdEU3tZsM9Oug==
+
 react-markdown@^5.0.3:
   version "5.0.3"
   resolved "https://registry.yarnpkg.com/react-markdown/-/react-markdown-5.0.3.tgz#41040ea7a9324b564b328fb81dd6c04f2a5373ac"

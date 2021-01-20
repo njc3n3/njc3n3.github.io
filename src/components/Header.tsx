@@ -6,6 +6,7 @@ import profile from '../assets/profile.jpg'
 import { largeScreenMixin, transitionMixin } from '../styles'
 import { Link, Modal } from './general'
 import { Login } from './'
+import { AuthContext } from '../App'
 
 type StyledHeaderProps = {
   backgroundColor: string
@@ -108,6 +109,7 @@ export const StyledLink = styled(RouterLink)<{ color: string; hover: string }>`
 `
 
 export default function Header() {
+  const { isLoggedIn } = useContext(AuthContext)
   const { darkText, surfaceColor, darkSubtitleText, minScreenWidth, backgroundColor } = useContext(ThemeContext)
   const [flipImage, setFlipImage] = useState(false)
   const [isLoginOpen, setIsLoginOpen] = useState(false)
@@ -133,13 +135,13 @@ export default function Header() {
               <img src={profile} alt='Profile' />
             </div>
             <div className='back'>
-              {!localStorage.getItem('token') ? (
-                <Link onClick={() => setIsLoginOpen(true)}>
-                  <h3>Login</h3>
-                </Link>
-              ) : (
+              {isLoggedIn() ? (
                 <Link onClick={() => localStorage.clear()}>
                   <h3>Logout</h3>
+                </Link>
+              ) : (
+                <Link onClick={() => setIsLoginOpen(true)}>
+                  <h3>Login</h3>
                 </Link>
               )}
             </div>
