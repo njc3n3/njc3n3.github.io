@@ -1,6 +1,6 @@
 import { Fragment, useContext, useState } from 'react'
 import styled, { css } from 'styled-components'
-import { Link as RouterLink } from 'react-router-dom'
+import { Link as RouterLink, useHistory } from 'react-router-dom'
 import { ThemeContext } from '..'
 import profile from '../assets/profile.jpg'
 import { largeScreenMixin, transitionMixin } from '../styles'
@@ -109,8 +109,11 @@ export const StyledLink = styled(RouterLink)<{ color: string; hover: string }>`
 `
 
 export default function Header() {
+  const history = useHistory()
   const { isLoggedIn } = useContext(AuthContext)
-  const { darkText, surfaceColor, darkSubtitleText, minScreenWidth, backgroundColor } = useContext(ThemeContext)
+  const { darkText, surfaceColor, darkSubtitleText, minScreenWidth, backgroundColor, mainSpacingRem } = useContext(
+    ThemeContext
+  )
   const [flipImage, setFlipImage] = useState(false)
   const [isLoginOpen, setIsLoginOpen] = useState(false)
 
@@ -136,9 +139,30 @@ export default function Header() {
             </div>
             <div className='back'>
               {isLoggedIn() ? (
-                <Link onClick={() => localStorage.clear()}>
-                  <h3>Logout</h3>
-                </Link>
+                <div
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    textAlign: 'center'
+                  }}
+                >
+                  <StyledLink
+                    to='/add-post'
+                    color={darkSubtitleText}
+                    hover={darkText}
+                    style={{ fontWeight: 'bold', fontSize: '1.15rem', marginBottom: mainSpacingRem }}
+                  >
+                    Add Post
+                  </StyledLink>
+                  <Link
+                    onClick={() => {
+                      localStorage.clear()
+                      history.push('/')
+                    }}
+                  >
+                    <h3>Logout</h3>
+                  </Link>
+                </div>
               ) : (
                 <Link onClick={() => setIsLoginOpen(true)}>
                   <h3>Login</h3>
