@@ -41,7 +41,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "yarn build && nodemon server/index.js",
+    "server": "nodemon server/index.js",
     "ui": "set PORT=8080 && react-scripts start"
   },
   "eslintConfig": {
