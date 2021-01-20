@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import axios, { AxiosResponse } from 'axios'
+import axios, { AxiosResponse, AxiosRequestConfig } from 'axios'
 import { serverURL } from '../config'
 
 type Operation = 'post' | 'put' | 'delete'
@@ -21,17 +21,18 @@ export default function useMutation(url: string, operation: Operation, onSuccess
   }
 
   const fullURL = `${serverURL}/${url}`
-  const runMutation = (input: any) => {
+  const runMutation = (input: any, token?: string) => {
     setLoading(true)
+    const config: AxiosRequestConfig | undefined = token ? { headers: { Authorization: `Bearer ${token}` } } : undefined
     switch (operation) {
       case 'post':
-        axios.post(fullURL, input).then(handleSuccess).catch(handleError)
+        axios.post(fullURL, input, config).then(handleSuccess).catch(handleError)
         break
       case 'put':
-        axios.put(fullURL, input).then(handleSuccess).catch(handleError)
+        axios.put(fullURL, input, config).then(handleSuccess).catch(handleError)
         break
       case 'delete':
-        axios.delete(fullURL, input).then(handleSuccess).catch(handleError)
+        axios.delete(fullURL, config).then(handleSuccess).catch(handleError)
         break
       default:
         setLoading(false)

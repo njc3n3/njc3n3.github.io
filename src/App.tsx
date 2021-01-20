@@ -26,7 +26,13 @@ function isLoggedIn() {
   return loggedIn
 }
 
-export const AuthContext = createContext({ isLoggedIn })
+function getToken() {
+  return localStorage.getItem('token')
+}
+
+const auth = { isLoggedIn, getToken }
+
+export const AuthContext = createContext(auth)
 
 function App() {
   const { backgroundColor, darkText, mainSpacing } = useContext(ThemeContext)
@@ -35,7 +41,7 @@ function App() {
   bodyStyles.color = darkText
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn }}>
+    <AuthContext.Provider value={auth}>
       <Router>
         <Header />
         <StyledMain spacing={mainSpacing}>
