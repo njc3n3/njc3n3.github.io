@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import moment from 'moment'
 import styled, { css } from 'styled-components'
 import { Link } from 'react-router-dom'
@@ -40,12 +40,35 @@ const StyledLink = styled(Link)<{ hoverColor: string }>`
 
 export default function Posts() {
   const { isLoggedIn, getToken } = useContext(AuthContext)
-  const { data, loading, error } = useQuery<{ posts: PostType[] }>(
-    isLoggedIn() ? 'posts/drafts' : 'posts',
-    undefined,
-    getToken() || undefined
-  )
+  const baseUrl = isLoggedIn() ? 'posts/drafts' : 'posts'
+  const [url, setUrl] = useState(baseUrl)
+  const [searchText, setSearchText] = useState('')
+  const [searchTag, setSearchTag] = useState('')
+
+  const { data, loading, error } = useQuery<{ posts: PostType[] }>(url, undefined, getToken() || undefined)
   const { mainSpacing, mainSpacingRem, darkSubtitleText } = useContext(ThemeContext)
+
+  const submitForm = () => {
+    const tagString = `tag=${searchTag}`
+    const textString = `text=${searchText}`
+
+    if (searchTag && searchText) {
+      setUrl(`${baseUrl}?${tagString}&${textString}`)
+    } else if (searchTag || searchText) {
+      if (searchTag) {
+        setUrl(`${baseUrl}?${tagString}`)
+      } else {
+        setUrl(`${baseUrl}?${textString}`)
+      }
+    } else {
+      setUrl(baseUrl)
+    }
+  }
+
+  const clearForm = () => {
+    setSearchTag('')
+    setSearchText('')
+  }
 
   let content = <></>
   if (error) {
@@ -63,17 +86,31 @@ export default function Posts() {
         <Content style={{ marginBottom: mainSpacingRem }}>
           <h3 style={{ marginBottom: mainSpacingRem }}>Search for a post</h3>
           <div style={{ display: 'flex', width: '100%', alignItems: 'center', marginBottom: mainSpacingRem }}>
-            <Input placeholder='Enter search text here...' style={{ flex: 1 }} />
+            <Input
+              placeholder='Enter search text here...'
+              style={{ flex: 1 }}
+              value={searchText}
+              onChange={e => setSearchText(e.target.value)}
+            />
             <strong style={{ paddingLeft: mainSpacingRem, paddingRight: `${mainSpacing / 2}rem` }}>Tags: </strong>
-            <select style={{ padding: '0.25rem 0.5rem' }}>
+            <select
+              style={{ padding: '0.25rem 0.5rem' }}
+              value={searchTag}
+              onChange={e => setSearchTag(e.target.value)}
+            >
               {availableTags?.map((tag, index) => (
-                <option key={index} value={index}>
+                <option key={index} value={tag}>
                   {tag}
                 </option>
               ))}
             </select>
           </div>
-          <Button>Search</Button>
+          <Button onClick={e => submitForm()} style={{ marginRight: mainSpacingRem }}>
+            Search
+          </Button>
+          <Button onClick={e => clearForm()} color='secondary'>
+            Clear
+          </Button>
         </Content>
         {data?.posts.map(({ title, tags, created, id }, index) => (
           <Content key={index}>
