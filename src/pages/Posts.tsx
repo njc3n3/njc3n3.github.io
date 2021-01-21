@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import moment from 'moment'
 import styled, { css } from 'styled-components'
 import { Link } from 'react-router-dom'
@@ -40,13 +40,18 @@ const StyledLink = styled(Link)<{ hoverColor: string }>`
 
 export default function Posts() {
   const { isLoggedIn, getToken } = useContext(AuthContext)
-  const baseUrl = isLoggedIn() ? 'posts/drafts' : 'posts'
+  const [showDrafts, setShowDrafts] = useState(false)
+  const baseUrl = showDrafts ? 'posts/drafts' : 'posts'
   const [url, setUrl] = useState(baseUrl)
   const [searchText, setSearchText] = useState('')
   const [searchTag, setSearchTag] = useState('')
 
   const { data, loading, error } = useQuery<{ posts: PostType[] }>(url, undefined, getToken() || undefined)
   const { mainSpacing, mainSpacingRem, darkSubtitleText } = useContext(ThemeContext)
+
+  useEffect(() => {
+    setUrl(baseUrl)
+  }, [baseUrl])
 
   const submitForm = () => {
     const tagString = `tag=${searchTag}`
@@ -84,7 +89,7 @@ export default function Posts() {
     content = (
       <Container spacing={mainSpacing}>
         <Content style={{ marginBottom: mainSpacingRem }}>
-          <h3 style={{ marginBottom: mainSpacingRem }}>Search for a post</h3>
+          <h3 style={{ marginBottom: mainSpacingRem }}>Search for a {showDrafts ? 'drafts' : 'posts'}</h3>
           <div style={{ display: 'flex', width: '100%', alignItems: 'center', marginBottom: mainSpacingRem }}>
             <Input
               placeholder='Enter search text here...'
@@ -108,9 +113,12 @@ export default function Posts() {
           <Button onClick={e => submitForm()} style={{ marginRight: mainSpacingRem }}>
             Search
           </Button>
-          <Button onClick={e => clearForm()} color='secondary'>
+          <Button onClick={e => clearForm()} color='secondary' style={{ marginRight: mainSpacingRem }}>
             Clear
           </Button>
+          {isLoggedIn() && (
+            <Button onClick={() => setShowDrafts(!showDrafts)}>Show {showDrafts ? 'posts' : 'drafts'}</Button>
+          )}
         </Content>
         {data?.posts.map(({ title, tags, created, id }, index) => (
           <Content key={index}>
