@@ -29,10 +29,10 @@ type Props = {
   error?: string
 } & InputHTMLAttributes<HTMLInputElement>
 
-const Input = forwardRef<HTMLInputElement, Props>(({ label, error, style, ...props }, ref) => {
+const Input = forwardRef<HTMLInputElement, Props>(({ label, error, style, className, ...props }, ref) => {
   const { primaryColor, errorColor } = useContext(ThemeContext)
   return (
-    <Container labelColor={primaryColor} errorColor={errorColor} style={style}>
+    <Container labelColor={primaryColor} errorColor={errorColor} style={style} className={className}>
       {label && <label>{label}</label>}
       <StyledInput ref={ref} {...props} />
       {error && <span>{error}</span>}

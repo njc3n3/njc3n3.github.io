@@ -28,6 +28,38 @@ const Container = styled.div<{ spacing: number }>`
   ${({ spacing }) => largeScreenMixin(LargeContainerStyles(spacing))}
 `
 
+const LargeFormStyles = (spacing: string) => css`
+  .btn-group {
+    display: flex;
+    justify-content: flex-start;
+    button {
+      margin-right: ${spacing};
+      :last-of-type {
+        margin-right: 0;
+      }
+    }
+  }
+`
+const StyledForm = styled.div<{ spacing: string }>`
+  select {
+    padding: 0.25rem 0.5rem;
+  }
+  .btn-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: ${({ spacing }) => spacing};
+  }
+  .input-group {
+    display: flex;
+    flex-direction: column;
+  }
+  .text-input {
+    margin-bottom: ${({ spacing }) => spacing};
+  }
+
+  ${({ spacing }) => largeScreenMixin(LargeFormStyles(spacing))}
+`
+
 const StyledLink = styled(Link)<{ hoverColor: string }>`
   color: inherit;
   text-decoration: none;
@@ -89,36 +121,35 @@ export default function Posts() {
     content = (
       <Container spacing={mainSpacing}>
         <Content style={{ marginBottom: mainSpacingRem }}>
-          <h3 style={{ marginBottom: mainSpacingRem }}>Search for a {showDrafts ? 'drafts' : 'posts'}</h3>
-          <div style={{ display: 'flex', width: '100%', alignItems: 'center', marginBottom: mainSpacingRem }}>
-            <Input
-              placeholder='Enter search text here...'
-              style={{ flex: 1 }}
-              value={searchText}
-              onChange={e => setSearchText(e.target.value)}
-            />
-            <strong style={{ paddingLeft: mainSpacingRem, paddingRight: `${mainSpacing / 2}rem` }}>Tags: </strong>
-            <select
-              style={{ padding: '0.25rem 0.5rem' }}
-              value={searchTag}
-              onChange={e => setSearchTag(e.target.value)}
-            >
-              {availableTags?.map((tag, index) => (
-                <option key={index} value={tag}>
-                  {tag}
-                </option>
-              ))}
-            </select>
-          </div>
-          <Button onClick={e => submitForm()} style={{ marginRight: mainSpacingRem }}>
-            Search
-          </Button>
-          <Button onClick={e => clearForm()} color='secondary' style={{ marginRight: mainSpacingRem }}>
-            Clear
-          </Button>
-          {isLoggedIn() && (
-            <Button onClick={() => setShowDrafts(!showDrafts)}>Show {showDrafts ? 'posts' : 'drafts'}</Button>
-          )}
+          <h3 style={{ marginBottom: mainSpacingRem }}>Search for {showDrafts ? 'drafts' : 'posts'}</h3>
+          <StyledForm spacing={mainSpacingRem}>
+            <div className='input-group'>
+              <strong>Text: </strong>
+              <Input
+                placeholder='Enter search text here...'
+                value={searchText}
+                onChange={e => setSearchText(e.target.value)}
+                className='text-input'
+              />
+              <strong>Tags: </strong>
+              <select value={searchTag} onChange={e => setSearchTag(e.target.value)}>
+                {availableTags?.map((tag, index) => (
+                  <option key={index} value={tag}>
+                    {tag}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className='btn-group'>
+              <Button onClick={e => submitForm()}>Search</Button>
+              <Button onClick={e => clearForm()} color='secondary'>
+                Clear
+              </Button>
+              {isLoggedIn() && (
+                <Button onClick={() => setShowDrafts(!showDrafts)}>Show {showDrafts ? 'posts' : 'drafts'}</Button>
+              )}
+            </div>
+          </StyledForm>
         </Content>
         {data?.posts.map(({ title, tags, created, id }, index) => (
           <Content key={index}>
