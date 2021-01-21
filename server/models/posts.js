@@ -36,8 +36,18 @@ exports.addPost = (post, cb) => {
     })
 }
 
-exports.getAllPosts = cb => {
-  Post.find({})
+exports.getPosts = ({ tag, text, showDrafts }, cb) => {
+  let filter = !tag && !text ? null : {}
+  filter = tag ? { tags: tag } : filter // search by tag
+  if (text) {
+    const re = new RegExp(text, 'i')
+    filter = { ...filter, $or: [{ title: re }, { content: re }] } // search by tag AND (title OR content contains)
+  }
+  const limit = filter === null && !showDrafts ? 5 : null // limit post results if query has no filters (NOTE: no limit on drafts)
+
+  Post.find({ isPublished: showDrafts ? false : true, ...filter })
+    .sort({ created: 'desc' })
+    .limit(limit)
     .then(posts => {
       cb(posts)
     })
@@ -46,11 +56,17 @@ exports.getAllPosts = cb => {
     })
 }
 
-exports.getPost = (id, cb) => {
+exports.getPost = ({ id, showDrafts }, cb) => {
   Post.findById(id)
     .then(post => {
       if (post) {
-        cb(post.toJSON())
+        if (!showDrafts && !post.isPublished) {
+          cb(undefined, 'This post is in not published yet')
+        } else if (showDrafts && post.isPublished) {
+          cb(undefined, 'This post has already been published')
+        } else {
+          cb(post.toJSON())
+        }
       } else {
         cb(undefined, `Post ${id} not found`)
       }

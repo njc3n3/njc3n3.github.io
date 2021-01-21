@@ -3,9 +3,10 @@ import moment from 'moment'
 import styled, { css } from 'styled-components'
 import { Link } from 'react-router-dom'
 import { useQuery } from '../hooks'
-import { Content } from '../components/general'
+import { Button, Content, Input } from '../components/general'
 import { ThemeContext } from '..'
 import { largeScreenMixin, transitionMixin } from '../styles'
+import { AuthContext } from '../App'
 
 export type PostType = {
   id: string
@@ -38,8 +39,13 @@ const StyledLink = styled(Link)<{ hoverColor: string }>`
 `
 
 export default function Posts() {
-  const { data, loading, error } = useQuery<{ posts: PostType[] }>('posts')
-  const { mainSpacing, darkSubtitleText } = useContext(ThemeContext)
+  const { isLoggedIn, getToken } = useContext(AuthContext)
+  const { data, loading, error } = useQuery<{ posts: PostType[] }>(
+    isLoggedIn() ? 'posts/drafts' : 'posts',
+    undefined,
+    getToken() || undefined
+  )
+  const { mainSpacing, mainSpacingRem, darkSubtitleText } = useContext(ThemeContext)
 
   let content = <></>
   if (error) {
@@ -47,27 +53,44 @@ export default function Posts() {
   } else if (loading) {
     content = <h3>Loading...</h3>
   } else {
+    const availableTags = data?.posts.reduce<string[]>(
+      (total, currentPost) => [...total, ...currentPost.tags.filter(tag => !total.includes(tag))],
+      ['']
+    )
+
     content = (
       <Container spacing={mainSpacing}>
-        {data?.posts.map(
-          ({ title, isPublished, tags, created, id }, index) =>
-            isPublished && (
-              <Content key={index}>
-                <StyledLink hoverColor={darkSubtitleText} to={`/posts/${id}`}>
-                  <h1 style={{ marginBottom: `${mainSpacing / 2}rem` }}>{title}</h1>
-                </StyledLink>
-                <p style={{ marginBottom: `${mainSpacing / 2}rem` }}>{moment(created).format('MMMM Do, YYYY')}</p>
-                {tags && (
-                  <p style={{ color: darkSubtitleText }}>
-                    {tags.reduce(
-                      (tagString, tag, index) => (tagString += `#${tag}${index !== tags.length - 1 ? ', ' : ''}`),
-                      ''
-                    )}
-                  </p>
+        <Content style={{ marginBottom: mainSpacingRem }}>
+          <h3 style={{ marginBottom: mainSpacingRem }}>Search for a post</h3>
+          <div style={{ display: 'flex', width: '100%', alignItems: 'center', marginBottom: mainSpacingRem }}>
+            <Input placeholder='Enter search text here...' style={{ flex: 1 }} />
+            <strong style={{ paddingLeft: mainSpacingRem, paddingRight: `${mainSpacing / 2}rem` }}>Tags: </strong>
+            <select style={{ padding: '0.25rem 0.5rem' }}>
+              {availableTags?.map((tag, index) => (
+                <option key={index} value={index}>
+                  {tag}
+                </option>
+              ))}
+            </select>
+          </div>
+          <Button>Search</Button>
+        </Content>
+        {data?.posts.map(({ title, tags, created, id }, index) => (
+          <Content key={index}>
+            <StyledLink hoverColor={darkSubtitleText} to={`/posts/${id}`}>
+              <h1 style={{ marginBottom: `${mainSpacing / 2}rem` }}>{title}</h1>
+            </StyledLink>
+            <p style={{ marginBottom: `${mainSpacing / 2}rem` }}>{moment(created).format('MMMM Do, YYYY')}</p>
+            {tags && (
+              <p style={{ color: darkSubtitleText }}>
+                {tags.reduce(
+                  (tagString, tag, index) => (tagString += `#${tag}${index !== tags.length - 1 ? ', ' : ''}`),
+                  ''
                 )}
-              </Content>
-            )
-        )}
+              </p>
+            )}
+          </Content>
+        ))}
       </Container>
     )
   }

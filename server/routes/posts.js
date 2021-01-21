@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { addPost, getAllPosts, getPost, deletePost, updatePost } = require('../models/posts')
+const { addPost, getPosts, getPost, deletePost, updatePost } = require('../models/posts')
 const { sendErrorResponse, sendDataResponse, sendMsgResponse, _idStrippedDoc } = require('../utils/response')
 const { authenticateToken } = require('../utils/auth')
 
@@ -14,11 +14,10 @@ router.post('/create', authenticateToken, (req, res) => {
   })
 })
 
-// Open route for public readers
-router.get('', (req, res) => {
-  const { id } = req.query
+function handlePostAndDraftRequests(req, res, showDrafts) {
+  const { id, tag, text } = req.query
   if (id) {
-    getPost(id, (post, err) => {
+    getPost({ id, showDrafts }, (post, err) => {
       if (err) {
         sendErrorResponse(res, 500, err)
       } else {
@@ -26,7 +25,7 @@ router.get('', (req, res) => {
       }
     })
   } else {
-    getAllPosts((posts, err) => {
+    getPosts({ tag, text, showDrafts }, (posts, err) => {
       if (err) {
         sendErrorResponse(res, 500, err)
       } else {
@@ -34,7 +33,12 @@ router.get('', (req, res) => {
       }
     })
   }
-})
+}
+
+// Open route for public readers
+router.get('', (req, res) => handlePostAndDraftRequests(req, res, false))
+
+router.get('/drafts', authenticateToken, (req, res) => handlePostAndDraftRequests(req, res, true))
 
 router.delete('', authenticateToken, (req, res) => {
   const { id } = req.query
