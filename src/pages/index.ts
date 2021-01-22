@@ -1,4 +1,5 @@
 export { default as AddPost } from './AddPost'
+export { default as EditDraft } from './EditDraft'
 export { default as About } from './About'
 export { default as Post, StyledContent as StyledPostContent } from './Post'
 export { default as Posts } from './Posts'

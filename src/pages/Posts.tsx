@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from 'react'
 import moment from 'moment'
 import styled, { css } from 'styled-components'
-import { Link } from 'react-router-dom'
-import { useQuery } from '../hooks'
+import { Link, useHistory } from 'react-router-dom'
+import { useMutation, useQuery } from '../hooks'
 import { Button, Content, Input } from '../components/general'
 import { ThemeContext } from '..'
 import { largeScreenMixin, transitionMixin } from '../styles'
@@ -71,7 +71,9 @@ const StyledLink = styled(Link)<{ hoverColor: string }>`
 `
 
 export default function Posts() {
+  const history = useHistory()
   const { isLoggedIn, getToken } = useContext(AuthContext)
+  const { mainSpacing, mainSpacingRem, darkSubtitleText } = useContext(ThemeContext)
   const [showDrafts, setShowDrafts] = useState(false)
   const baseUrl = showDrafts ? 'posts/drafts' : 'posts'
   const [url, setUrl] = useState(baseUrl)
@@ -79,7 +81,14 @@ export default function Posts() {
   const [searchTag, setSearchTag] = useState('')
 
   const { data, loading, error } = useQuery<{ posts: PostType[] }>(url, undefined, getToken() || undefined)
-  const { mainSpacing, mainSpacingRem, darkSubtitleText } = useContext(ThemeContext)
+  const { runMutation } = useMutation('posts', 'put', res => {
+    if (res.data) {
+      console.log('SUCCESS')
+      setShowDrafts(true)
+    } else {
+      console.error('CHECK DB')
+    }
+  })
 
   useEffect(() => {
     setUrl(baseUrl)
@@ -107,6 +116,14 @@ export default function Posts() {
     setSearchText('')
   }
 
+  const handleDraftEditClick = (post: PostType) => {
+    if (showDrafts) {
+      history.push(`edit-draft/${post.id}`)
+    } else {
+      runMutation({ ...post, isPublished: false }, getToken() || undefined)
+    }
+  }
+
   let content = <></>
   if (error) {
     content = <h2>Error</h2>
@@ -117,6 +134,8 @@ export default function Posts() {
       (total, currentPost) => [...total, ...currentPost.tags.filter(tag => !total.includes(tag))],
       ['']
     )
+
+    const calcSpacing = `${mainSpacing / 2}rem`
 
     content = (
       <Container spacing={mainSpacing}>
@@ -154,9 +173,9 @@ export default function Posts() {
         {data?.posts.map(({ title, tags, created, id }, index) => (
           <Content key={index}>
             <StyledLink hoverColor={darkSubtitleText} to={`/posts/${id}`}>
-              <h1 style={{ marginBottom: `${mainSpacing / 2}rem` }}>{title}</h1>
+              <h1 style={{ marginBottom: calcSpacing }}>{title}</h1>
             </StyledLink>
-            <p style={{ marginBottom: `${mainSpacing / 2}rem` }}>{moment(created).format('MMMM Do, YYYY')}</p>
+            <p style={{ marginBottom: calcSpacing }}>{moment(created).format('MMMM Do, YYYY')}</p>
             {tags && (
               <p style={{ color: darkSubtitleText }}>
                 {tags.reduce(
@@ -164,6 +183,11 @@ export default function Posts() {
                   ''
                 )}
               </p>
+            )}
+            {isLoggedIn() && (
+              <Button style={{ marginTop: calcSpacing }} onClick={() => handleDraftEditClick(data.posts[index])}>
+                {showDrafts ? 'Edit' : 'Make Draft'}
+              </Button>
             )}
           </Content>
         ))}

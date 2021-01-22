@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-d
 import { isExpired } from 'react-jwt'
 import { ThemeContext } from '.'
 import { Header, Footer, PrivateRoute } from './components'
-import { AddPost, About, Posts, Post } from './pages'
+import { AddPost, About, Posts, Post, EditDraft } from './pages'
 import { largeScreenMixin } from './styles'
 
 function LargeMainStyles(spacing: number) {
@@ -57,6 +57,9 @@ function App() {
             </Route>
             <PrivateRoute exact path='/add-post'>
               <AddPost />
+            </PrivateRoute>
+            <PrivateRoute exact path='/edit-draft/:id'>
+              <EditDraft />
             </PrivateRoute>
             <Redirect to='/' />
           </Switch>
