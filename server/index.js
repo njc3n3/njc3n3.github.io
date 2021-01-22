@@ -25,7 +25,7 @@ app.use(`${baseURL}/user`, require('./routes/user'))
 app.use(`${baseURL}/posts`, require('./routes/posts'))
 
 app.get('*', (_req, res) => {
-  res.sendFile(path.join(__dirname + '../build/index.html'))
+  res.sendFile(path.join(__dirname, '../build/index.html'))
 })
 
 mongoose.connect(
