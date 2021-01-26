@@ -14,19 +14,39 @@
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.53",
     "@types/react-dom": "^16.9.8",
+    "@types/react-router-dom": "^5.1.6",
+    "@types/react-syntax-highlighter": "^13.5.0",
     "@types/styled-components": "^5.1.5",
+    "axios": "^0.21.1",
+    "bcrypt": "^5.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "log4js": "^6.3.0",
+    "moment": "^2.29.1",
+    "mongoose": "^5.11.8",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-hook-form": "^6.13.1",
+    "react-jwt": "^1.1.0",
+    "react-markdown": "^5.0.3",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
-    "serve": "^11.3.2",
+    "react-syntax-highlighter": "^15.4.3",
     "styled-components": "^5.2.1",
     "typescript": "^4.0.3"
   },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  },
   "scripts": {
-    "start": "serve -s build",
+    "start": "node server/index.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "server": "nodemon server/index.js",
+    "ui": "set PORT=8080 && react-scripts start"
   },
   "eslintConfig": {
     "extends": [

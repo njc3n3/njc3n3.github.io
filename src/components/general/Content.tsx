@@ -14,10 +14,8 @@ type Props = {
 export default function Content({ children, ...props }: Props) {
   const { surfaceColor, mainSpacingRem } = useContext(ThemeContext)
   return (
-    <>
-      <StyledContent color={surfaceColor} padding={mainSpacingRem} {...props}>
-        {children}
-      </StyledContent>
-    </>
+    <StyledContent color={surfaceColor} padding={mainSpacingRem} {...props}>
+      {children}
+    </StyledContent>
   )
 }

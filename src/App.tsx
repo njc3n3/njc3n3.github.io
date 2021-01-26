@@ -1,8 +1,10 @@
-import { useContext } from 'react'
+import { createContext, useContext } from 'react'
 import styled, { css } from 'styled-components'
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
+import { isExpired } from 'react-jwt'
 import { ThemeContext } from '.'
-import { Header, Footer } from './components'
-import { About } from './pages'
+import { Header, Footer, PrivateRoute } from './components'
+import { AddPost, About, Posts, Post, EditDraft } from './pages'
 import { largeScreenMixin } from './styles'
 
 function LargeMainStyles(spacing: number) {
@@ -15,6 +17,23 @@ const StyledMain = styled.main<{ spacing: number }>`
   ${({ spacing }) => largeScreenMixin(LargeMainStyles(spacing))}
 `
 
+function isLoggedIn() {
+  let loggedIn = false
+  const token = localStorage.getItem('token')
+  if (token) {
+    loggedIn = !isExpired(token)
+  }
+  return loggedIn
+}
+
+function getToken() {
+  return localStorage.getItem('token')
+}
+
+const auth = { isLoggedIn, getToken }
+
+export const AuthContext = createContext(auth)
+
 function App() {
   const { backgroundColor, darkText, mainSpacing } = useContext(ThemeContext)
   const bodyStyles = document.body.style
@@ -22,13 +41,32 @@ function App() {
   bodyStyles.color = darkText
 
   return (
-    <>
-      <Header />
-      <StyledMain spacing={mainSpacing}>
-        <About />
-      </StyledMain>
-      <Footer />
-    </>
+    <AuthContext.Provider value={auth}>
+      <Router>
+        <Header />
+        <StyledMain spacing={mainSpacing}>
+          <Switch>
+            <Route exact path='/'>
+              <About />
+            </Route>
+            <Route exact path='/posts'>
+              <Posts />
+            </Route>
+            <Route exact path='/posts/:id'>
+              <Post />
+            </Route>
+            <PrivateRoute exact path='/add-post'>
+              <AddPost />
+            </PrivateRoute>
+            <PrivateRoute exact path='/edit-draft/:id'>
+              <EditDraft />
+            </PrivateRoute>
+            <Redirect to='/' />
+          </Switch>
+        </StyledMain>
+        <Footer />
+      </Router>
+    </AuthContext.Provider>
   )
 }
 
