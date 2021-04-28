@@ -1,11 +1,10 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { TopBar } from '../components/home'
+import { Layout } from '../components/layout'
 
 export default function Home() {
   return (
-    <div className='flex flex-col h-screen'>
-      <TopBar />
+    <Layout>
       <div className='flex flex-col items-center justify-center h-full gap-6 mt-4'>
         <div className='relative w-64 h-64'>
           <Image src='/me.jpg' alt='Picture of me' layout='fill' objectFit='cover' className='rounded-full' />
@@ -15,11 +14,11 @@ export default function Home() {
           <p className='text-3xl text-gray-400 font-extralight'>Frontend Engineer</p>
         </div>
         <Link href='/contact'>
-          <a className='p-2 transition duration-75 border border-black hover:text-white hover:border-blue-600 hover:bg-blue-600 dark:border-white'>
+          <a className='p-2 text-xl transition duration-75 border border-black hover:text-white hover:border-blue-600 hover:bg-blue-600 dark:border-white'>
             Contact Me
           </a>
         </Link>
       </div>
-    </div>
+    </Layout>
   )
 }

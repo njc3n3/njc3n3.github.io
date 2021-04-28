@@ -26,8 +26,8 @@ export default function TopBar() {
           <div className='flex mb-4'>
             <div className='p-1 border border-white dark:border-black'>NC</div>
           </div>
-          {links.map(link => (
-            <Link href={`/${link}`}>
+          {links.map((link, index) => (
+            <Link href={`/${link}`} key={index}>
               <a className='text-3xl font-light capitalize'>{link}</a>
             </Link>
           ))}

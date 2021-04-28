@@ -10,7 +10,7 @@ export default class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <title>Nick Coffey</title>
+          <link rel='shortcut icon' href='favicon.svg' />
         </Head>
         <body className='dark:bg-gray-900 dark:text-white'>
           <Main />
