@@ -1,22 +1,11 @@
-import { useState } from 'react'
-import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
+import { TopBar } from '../components/home'
 
 export default function Home() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-
-  const baseMenuBarStyle = `w-8 h-1 bg-black dark:bg-white transition duration-150`
   return (
     <div className='flex flex-col h-screen'>
-      <div className='flex items-center justify-between w-full px-4 mt-4'>
-        <div className='p-1 border border-black dark:border-white'>NC</div>
-        <div className='flex flex-col gap-2 cursor-pointer' onClick={() => setIsMenuOpen(!isMenuOpen)}>
-          <span className={`${baseMenuBarStyle} ${isMenuOpen && 'transform -rotate-45 translate-y-3'}`}></span>
-          <span className={`${baseMenuBarStyle} ${isMenuOpen && 'opacity-0'}`}></span>
-          <span className={`${baseMenuBarStyle} ${isMenuOpen && 'transform rotate-45 -translate-y-3'}`}></span>
-        </div>
-      </div>
+      <TopBar />
       <div className='flex flex-col items-center justify-center h-full gap-6 mt-4'>
         <div className='relative w-64 h-64'>
           <Image src='/me.jpg' alt='Picture of me' layout='fill' objectFit='cover' className='rounded-full' />
