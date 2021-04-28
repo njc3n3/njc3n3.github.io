@@ -12,6 +12,9 @@ export default function Layout({ children, title }: Props) {
     <>
       <Head>
         <title>Nick Coffey{title && ` | ${title}`}</title>
+        <meta charSet='UTF-8' key='charset' />
+        <meta name='viewport' content='initial-scale=1.0, width=device-width' key='viewport' />
+        <meta name='description' content="Nick Coffey's digital resume and portfolio." key='description' />
       </Head>
       <div className='flex flex-col h-screen'>
         <TopBar />
