@@ -9,7 +9,9 @@ export default function TopBar() {
   return (
     <>
       <div className='flex items-center justify-between w-full px-4 mt-4'>
-        <div className='p-1 border border-black dark:border-white'>NC</div>
+        <Link href='/'>
+          <div className='p-1 border border-black dark:border-white'>NC</div>
+        </Link>
         <div className='flex flex-col gap-2 cursor-pointer' onClick={() => setIsMenuOpen(!isMenuOpen)}>
           <span className={`${baseMenuBarStyle} ${isMenuOpen && 'transform -rotate-45 translate-y-3'}`}></span>
           <span className={`${baseMenuBarStyle} ${isMenuOpen && 'opacity-0'}`}></span>
@@ -18,13 +20,15 @@ export default function TopBar() {
       </div>
 
       <div
-        className={`absolute z-10 transition-width duration-150 top-0 h-screen w-0 bg-black dark:bg-white bg-opacity-75 overflow-x-hidden ${
+        className={`absolute z-10 transition-width duration-150 top-0 h-screen w-0 bg-black dark:bg-white bg-opacity-90 overflow-x-hidden ${
           isMenuOpen && 'w-5/6'
         }`}
       >
         <div className='flex flex-col gap-4 p-4 text-white dark:text-black'>
           <div className='flex mb-4'>
-            <div className='p-1 border border-white dark:border-black'>NC</div>
+            <Link href='/'>
+              <div className='p-1 border border-white dark:border-black'>NC</div>
+            </Link>
           </div>
           {links.map((link, index) => (
             <Link href={`/${link}`} key={index}>
