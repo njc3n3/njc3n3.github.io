@@ -7,7 +7,7 @@ function Paragraph({ children }: { children: string }) {
 export default function About() {
   return (
     <Layout title='About'>
-      <div className='flex flex-col justify-center h-full gap-4 text-center'>
+      <div className='flex flex-col justify-center gap-4 mt-4 text-center'>
         <p className='text-5xl'>About Me</p>
         <Paragraph>
           I didn't take the typical path to becoming a software developer. As a kid I was always curious about how

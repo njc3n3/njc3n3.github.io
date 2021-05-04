@@ -4,7 +4,7 @@ import { Layout } from '../components/layout'
 
 export default function Home() {
   return (
-    <Layout>
+    <Layout fullscreen>
       <div className='flex flex-col items-center justify-center h-full gap-6 mt-4'>
         <div className='relative w-64 h-64'>
           <Image src='/me.jpg' alt='Picture of me' layout='fill' objectFit='cover' className='rounded-full' />

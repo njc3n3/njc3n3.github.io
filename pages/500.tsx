@@ -5,7 +5,7 @@ export default function ErrorPage() {
   const router = useRouter()
 
   return (
-    <Layout title='Error'>
+    <Layout title='Error' fullscreen>
       <div className='flex flex-col justify-center h-full gap-4 text-center'>
         <p className='text-5xl'>Error occured</p>
         <div className='flex justify-center'>
